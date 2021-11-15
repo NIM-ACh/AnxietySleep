@@ -1,0 +1,18 @@
+Package: proj.Anxiety2021
+Title: Ansiedad y Confinamiento (2021)
+Version: 0.0.0.9000
+Authors@R: 
+    c(person("Caren", "Alvarado Aravena", , "caren.ccaa@gmail.com", role = c("aut"),
+             comment = c(ORCID = "0000-0002-1851-2499")),
+      person("Matías", "Castillo Aguilar", , "matcasti@umag.cl", role = c("aut", "cre"),
+             comment = c(ORCID = "0000-0001-7291-247X")),
+      person("Cristian", "Núñez Espinosa", , "cristian.nunez@umag.cl", role = c("aut"),
+             comment = c(ORCID = "0000-0002-9896-7062")))
+Description: Herramientas complementarias para el análisis de los datos del estudio de 
+             ansiedad, calidad de sueño y confinamiento (2021).
+License: CC BY 4.0
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    lifecycle

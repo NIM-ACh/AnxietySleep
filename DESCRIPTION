@@ -16,3 +16,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
     lifecycle
+URL: https://github.com/matcasti/proj.Anxiety2021
+BugReports: https://github.com/matcasti/proj.Anxiety2021/issues

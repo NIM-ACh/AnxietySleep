@@ -13,12 +13,11 @@ knitr::opts_chunk$set(
 )
 ```
 
-# proj.Anxiety2021
+# AnxietySleep
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/proj.Anxiety2021)](https://CRAN.R-project.org/package=proj.Anxiety2021)
-[![Codecov test coverage](https://codecov.io/gh/matcasti/proj.Anxiety2021/branch/master/graph/badge.svg)](https://app.codecov.io/gh/matcasti/proj.Anxiety2021?branch=master)
 [![R-CMD-check](https://github.com/matcasti/proj.Anxiety2021/workflows/R-CMD-check/badge.svg)](https://github.com/matcasti/proj.Anxiety2021/actions)
 <!-- badges: end -->
 

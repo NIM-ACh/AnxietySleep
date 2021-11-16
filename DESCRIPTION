@@ -17,8 +17,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Imports: 
     lifecycle
-URL: https://github.com/matcasti/proj.AnxietySleep
-BugReports: https://github.com/matcasti/proj.AnxietySleep/issues
+URL: https://github.com/NIM-ACh/AnxietySleep
+BugReports: https://github.com/NIM-ACh/AnxietySleep/issues
 Depends: 
     R (>= 2.10)
 LazyData: true

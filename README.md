@@ -9,7 +9,7 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/AnxietySleep)](https://CRAN.R-project.org/package=AnxietySleep)
-[![R-CMD-check](https://github.com/matcasti/AnxietySleep/workflows/R-CMD-check/badge.svg)](https://github.com/matcasti/AnxietySleep/actions)
+[![R-CMD-check](https://github.com/NIM-ACh/AnxietySleep/workflows/R-CMD-check/badge.svg)](https://github.com/NIM-ACh/AnxietySleep/actions)
 <!-- badges: end -->
 
 Este paquete contiene herramientas complementarias para la exploración y
@@ -26,5 +26,5 @@ puedes escribir en tu consola d `R` lo siguiente:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("matcasti/AnxietySleep")
+devtools::install_github("NIM-ACh/AnxietySleep")
 ```

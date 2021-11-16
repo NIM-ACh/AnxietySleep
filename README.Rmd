@@ -31,5 +31,5 @@ Para instalar el paquete `AnxietySleep` en su versión de desarrollo, puedes esc
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("matcasti/AnxietySleep")
+devtools::install_github("NIM-ACh/AnxietySleep")
 ```

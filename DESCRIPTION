@@ -1,4 +1,5 @@
-Package: proj.Anxiety2021
+Package: AnxietySleep
+Date: 2021-11-15
 Title: Ansiedad y Confinamiento (2021)
 Version: 0.0.0.9000
 Authors@R: 
@@ -18,3 +19,6 @@ Imports:
     lifecycle
 URL: https://github.com/matcasti/proj.Anxiety2021
 BugReports: https://github.com/matcasti/proj.Anxiety2021/issues
+Depends: 
+    R (>= 2.10)
+LazyData: true

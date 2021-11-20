@@ -76,11 +76,12 @@ library(gtsummary)
 
 ## Figura 1
 
-```{r fig.width=8, fig.height=6}
+<details><summary>Ver código</summary>
+```{r}
 # Eliminamos dos valores 
 remove_outliers <- quote(-c(which.min(pits_global), which.max(pits_global)))
 
-ggplot(data = dataset[i = eval(remove_outliers)],
+fig1 <- ggplot(data = dataset[i = eval(remove_outliers)],
        aes(x = sqrt(pits_global), 
            y = sqrt(beck_global))) +
   
@@ -120,11 +121,18 @@ ggplot(data = dataset[i = eval(remove_outliers)],
         ggside.panel.scale.x = .15,
         ggside.panel.scale.y = (.15 * 3 / 4))
 ```
+</details>
+
+```{r echo=FALSE, fig.width=8, fig.height=6}
+fig1
+```
+
 
 
 ## Figura 2
 
-```{r fig.width=6, fig.height=8}
+<details><summary>Ver código</summary>
+```{r}
 p1 <- ggstatsplot::ggbetweenstats(
   data = dataset, x = sexo, y = beck_global, 
   type = "np", xlab = "", ylab = "BAI", results.subtitle = FALSE,
@@ -139,15 +147,21 @@ p2 <- ggstatsplot::ggbetweenstats(
   ggtheme = theme_linedraw(base_family = "Times", base_size = 16),
   ggplot.component = list(theme(panel.grid = element_blank())))
 
-ggpubr::ggarrange(p1, p2, labels = c("A.", "B."), ncol = 1, hjust = 0)
+fig2 <- ggpubr::ggarrange(p1, p2, labels = c("A.", "B."), ncol = 1, hjust = 0)
 ```
+</details>
+
+```{r echo=FALSE, fig.width=6, fig.height=8}
+fig2
+```
+
 
 # Tabla
 
 ## Tabla 1
 
+<details><summary>Ver código</summary>
 ```{r}
-
 tbl_data <- copy(dataset)[, `:=`(
   sexo = `attr<-`(sexo, "label", "Sexo"),
   beck_global = `attr<-`(beck_global, "label", "Puntaje BAI"),
@@ -161,21 +175,26 @@ ec_tbl <- gtsummary::tbl_summary(tbl_data[zona == "EC"],
                        by = cat_edad, 
                        include = c(sexo, beck_global, pits_global)) %>%
   gtsummary::add_p(pvalue_fun = function(x) gtsummary::style_pvalue(x, digits = 3)) %>%
-  modify_header(update = gtsummary::all_stat_cols() ~ "**{level}**<br>N = {n} ({style_percent(p)}%)")
+  modify_header(update = gtsummary::all_stat_cols() ~ "**{level} años**<br>N = {n} ({style_percent(p)}%)")
 
 sc_tbl <- gtsummary::tbl_summary(tbl_data[zona == "SC"], 
                        by = cat_edad, 
                        include = c(sexo, beck_global, pits_global)) %>%
   gtsummary::add_p(pvalue_fun = function(x) { gtsummary::style_pvalue(x, digits = 3) }) %>%
-  gtsummary::modify_header(update = gtsummary::all_stat_cols() ~ "**{level}**<br>N = {n} ({style_percent(p)}%)")
+  gtsummary::modify_header(update = gtsummary::all_stat_cols() ~ "**{level} años**<br>N = {n} ({style_percent(p)}%)")
 
 tbl <- gtsummary::tbl_stack(tbls = list(ec_tbl, sc_tbl), quiet = TRUE) %>%
   gtsummary::modify_footnote(gtsummary::everything() ~ NA_character_) %>%
   gtsummary::as_gt()
 
-tbl %>%
+tbl <- tbl %>%
   gt::tab_spanner(label = gt::md("**Grupos etarios**"), columns = paste0("stat_", 1:4)) %>%
   gt::tab_row_group(label = gt::md("**Zona - EC**"), rows = 1:5) %>%
   gt::tab_row_group(label = gt::md("**Zona - SC**"), rows = 6:10)
+```
+</details>
+
+```{r echo=FALSE}
+tbl
 ```
 

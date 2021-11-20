@@ -139,11 +139,12 @@
 <div id="figura-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#figura-1" class="anchor"></a>Figura 1</h2>
+<details><p><summary>Ver código</summary></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Eliminamos dos valores </span>
 <span class="va">remove_outliers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/substitute.html">quote</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.min</a></span><span class="op">(</span><span class="va">pits_global</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">pits_global</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dataset</span><span class="op">[</span>i <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="va">remove_outliers</span><span class="op">)</span><span class="op">]</span>,
+<span class="va">fig1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">dataset</span><span class="op">[</span>i <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html">eval</a></span><span class="op">(</span><span class="va">remove_outliers</span><span class="op">)</span><span class="op">]</span>,
        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">pits_global</span><span class="op">)</span>, 
            y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">beck_global</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   
@@ -182,11 +183,12 @@
         panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span>,
         ggside.panel.scale.x <span class="op">=</span> <span class="fl">.15</span>,
         ggside.panel.scale.y <span class="op">=</span> <span class="op">(</span><span class="fl">.15</span> <span class="op">*</span> <span class="fl">3</span> <span class="op">/</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="Supplementary_files/figure-html/unnamed-chunk-2-1.png" width="100%"></p>
+</details><p><img src="Supplementary_files/figure-html/unnamed-chunk-3-1.png" width="100%"></p>
 </div>
 <div id="figura-2" class="section level2">
 <h2 class="hasAnchor">
 <a href="#figura-2" class="anchor"></a>Figura 2</h2>
+<details><p><summary>Ver código</summary></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">ggstatsplot</span><span class="fu">::</span><span class="fu"><a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html">ggbetweenstats</a></span><span class="op">(</span>
   data <span class="op">=</span> <span class="va">dataset</span>, x <span class="op">=</span> <span class="va">sexo</span>, y <span class="op">=</span> <span class="va">beck_global</span>, 
@@ -202,8 +204,8 @@
   ggtheme <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_linedraw</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"Times"</span>, base_size <span class="op">=</span> <span class="fl">16</span><span class="op">)</span>,
   ggplot.component <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>panel.grid <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu">ggpubr</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggarrange.html">ggarrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A."</span>, <span class="st">"B."</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
-<p><img src="Supplementary_files/figure-html/unnamed-chunk-3-1.png" width="100%"></p>
+<span class="va">fig2</span> <span class="op">&lt;-</span> <span class="fu">ggpubr</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggarrange.html">ggarrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A."</span>, <span class="st">"B."</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
+</details><p><img src="Supplementary_files/figure-html/unnamed-chunk-5-1.png" width="100%"></p>
 </div>
 </div>
 <div id="tabla" class="section level1">
@@ -212,9 +214,9 @@
 <div id="tabla-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tabla-1" class="anchor"></a>Tabla 1</h2>
+<details><p><summary>Ver código</summary></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">tbl_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span><span class="op">[</span>, <span class="fu">`:=`</span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">tbl_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span><span class="op">[</span>, <span class="fu">`:=`</span><span class="op">(</span>
   sexo <span class="op">=</span> <span class="fu">`attr&lt;-`</span><span class="op">(</span><span class="va">sexo</span>, <span class="st">"label"</span>, <span class="st">"Sexo"</span><span class="op">)</span>,
   beck_global <span class="op">=</span> <span class="fu">`attr&lt;-`</span><span class="op">(</span><span class="va">beck_global</span>, <span class="st">"label"</span>, <span class="st">"Puntaje BAI"</span><span class="op">)</span>,
   pits_global <span class="op">=</span> <span class="fu">`attr&lt;-`</span><span class="op">(</span><span class="va">pits_global</span>, <span class="st">"label"</span>, <span class="st">"Puntaje PSQI"</span><span class="op">)</span>
@@ -227,28 +229,28 @@
                        by <span class="op">=</span> <span class="va">cat_edad</span>, 
                        include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">sexo</span>, <span class="va">beck_global</span>, <span class="va">pits_global</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/add_p.html">add_p</a></span><span class="op">(</span>pvalue_fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/style_pvalue.html">style_pvalue</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/modify.html">modify_header</a></span><span class="op">(</span>update <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/select_helpers.html">all_stat_cols</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**{level}**&lt;br&gt;N = {n} ({style_percent(p)}%)"</span><span class="op">)</span>
+  <span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/modify.html">modify_header</a></span><span class="op">(</span>update <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/select_helpers.html">all_stat_cols</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**{level} años**&lt;br&gt;N = {n} ({style_percent(p)}%)"</span><span class="op">)</span>
 
 <span class="va">sc_tbl</span> <span class="op">&lt;-</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span><span class="va">tbl_data</span><span class="op">[</span><span class="va">zona</span> <span class="op">==</span> <span class="st">"SC"</span><span class="op">]</span>, 
                        by <span class="op">=</span> <span class="va">cat_edad</span>, 
                        include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">sexo</span>, <span class="va">beck_global</span>, <span class="va">pits_global</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/add_p.html">add_p</a></span><span class="op">(</span>pvalue_fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/style_pvalue.html">style_pvalue</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/modify.html">modify_header</a></span><span class="op">(</span>update <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/select_helpers.html">all_stat_cols</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**{level}**&lt;br&gt;N = {n} ({style_percent(p)}%)"</span><span class="op">)</span>
+  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/modify.html">modify_header</a></span><span class="op">(</span>update <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/select_helpers.html">all_stat_cols</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**{level} años**&lt;br&gt;N = {n} ({style_percent(p)}%)"</span><span class="op">)</span>
 
 <span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_stack.html">tbl_stack</a></span><span class="op">(</span>tbls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">ec_tbl</span>, <span class="va">sc_tbl</span><span class="op">)</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/modify.html">modify_footnote</a></span><span class="op">(</span><span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="cn">NA_character_</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+<span class="va">tbl</span> <span class="op">&lt;-</span> <span class="va">tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"**Grupos etarios**"</span><span class="op">)</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"stat_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html">tab_row_group</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"**Zona - EC**"</span><span class="op">)</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html">tab_row_group</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"**Zona - SC**"</span><span class="op">)</span>, rows <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
-<div id="bedrbcacko" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+</details><div id="prxyyaupla" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#bedrbcacko .gt_table {
+#prxyyaupla .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -273,7 +275,7 @@
   border-left-color: #D3D3D3;
 }
 
-#bedrbcacko .gt_heading {
+#prxyyaupla .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -285,7 +287,7 @@
   border-right-color: #D3D3D3;
 }
 
-#bedrbcacko .gt_title {
+#prxyyaupla .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -295,7 +297,7 @@
   border-bottom-width: 0;
 }
 
-#bedrbcacko .gt_subtitle {
+#prxyyaupla .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -305,13 +307,13 @@
   border-top-width: 0;
 }
 
-#bedrbcacko .gt_bottom_border {
+#prxyyaupla .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bedrbcacko .gt_col_headings {
+#prxyyaupla .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -326,7 +328,7 @@
   border-right-color: #D3D3D3;
 }
 
-#bedrbcacko .gt_col_heading {
+#prxyyaupla .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -346,7 +348,7 @@
   overflow-x: hidden;
 }
 
-#bedrbcacko .gt_column_spanner_outer {
+#prxyyaupla .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -358,15 +360,15 @@
   padding-right: 4px;
 }
 
-#bedrbcacko .gt_column_spanner_outer:first-child {
+#prxyyaupla .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bedrbcacko .gt_column_spanner_outer:last-child {
+#prxyyaupla .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bedrbcacko .gt_column_spanner {
+#prxyyaupla .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -378,7 +380,7 @@
   width: 100%;
 }
 
-#bedrbcacko .gt_group_heading {
+#prxyyaupla .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -400,7 +402,7 @@
   vertical-align: middle;
 }
 
-#bedrbcacko .gt_empty_group_heading {
+#prxyyaupla .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -415,15 +417,15 @@
   vertical-align: middle;
 }
 
-#bedrbcacko .gt_from_md > :first-child {
+#prxyyaupla .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bedrbcacko .gt_from_md > :last-child {
+#prxyyaupla .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bedrbcacko .gt_row {
+#prxyyaupla .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -442,7 +444,7 @@
   overflow-x: hidden;
 }
 
-#bedrbcacko .gt_stub {
+#prxyyaupla .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -454,7 +456,7 @@
   padding-left: 12px;
 }
 
-#bedrbcacko .gt_summary_row {
+#prxyyaupla .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -464,7 +466,7 @@
   padding-right: 5px;
 }
 
-#bedrbcacko .gt_first_summary_row {
+#prxyyaupla .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -474,7 +476,7 @@
   border-top-color: #D3D3D3;
 }
 
-#bedrbcacko .gt_grand_summary_row {
+#prxyyaupla .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -484,7 +486,7 @@
   padding-right: 5px;
 }
 
-#bedrbcacko .gt_first_grand_summary_row {
+#prxyyaupla .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,11 +496,11 @@
   border-top-color: #D3D3D3;
 }
 
-#bedrbcacko .gt_striped {
+#prxyyaupla .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bedrbcacko .gt_table_body {
+#prxyyaupla .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -507,7 +509,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#bedrbcacko .gt_footnotes {
+#prxyyaupla .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -521,13 +523,13 @@
   border-right-color: #D3D3D3;
 }
 
-#bedrbcacko .gt_footnote {
+#prxyyaupla .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#bedrbcacko .gt_sourcenotes {
+#prxyyaupla .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -541,41 +543,41 @@
   border-right-color: #D3D3D3;
 }
 
-#bedrbcacko .gt_sourcenote {
+#prxyyaupla .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#bedrbcacko .gt_left {
+#prxyyaupla .gt_left {
   text-align: left;
 }
 
-#bedrbcacko .gt_center {
+#prxyyaupla .gt_center {
   text-align: center;
 }
 
-#bedrbcacko .gt_right {
+#prxyyaupla .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bedrbcacko .gt_font_normal {
+#prxyyaupla .gt_font_normal {
   font-weight: normal;
 }
 
-#bedrbcacko .gt_font_bold {
+#prxyyaupla .gt_font_bold {
   font-weight: bold;
 }
 
-#bedrbcacko .gt_font_italic {
+#prxyyaupla .gt_font_italic {
   font-style: italic;
 }
 
-#bedrbcacko .gt_super {
+#prxyyaupla .gt_super {
   font-size: 65%;
 }
 
-#bedrbcacko .gt_footnote_marks {
+#prxyyaupla .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -592,13 +594,13 @@
     </tr>
 <tr>
 <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">
-<strong>18-25</strong><br>N = 141 (49%)</th>
+<strong>18-25 años</strong><br>N = 141 (49%)</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">
-<strong>26-40</strong><br>N = 80 (28%)</th>
+<strong>26-40 años</strong><br>N = 80 (28%)</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">
-<strong>41-50</strong><br>N = 38 (13%)</th>
+<strong>41-50 años</strong><br>N = 38 (13%)</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">
-<strong>&gt;50</strong><br>N = 28 (9.8%)</th>
+<strong>&gt;50 años</strong><br>N = 28 (9.8%)</th>
     </tr>
 </thead>
 <tbody class="gt_table_body">

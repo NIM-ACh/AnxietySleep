@@ -21,7 +21,7 @@ Imports:
 URL: https://github.com/NIM-ACh/AnxietySleep
 BugReports: https://github.com/NIM-ACh/AnxietySleep/issues
 Depends: 
-    R (>= 2.10)
+    R (>= 4.0.0)
 LazyData: true
 Suggests: 
     rmarkdown,

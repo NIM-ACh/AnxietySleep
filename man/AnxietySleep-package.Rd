@@ -4,16 +4,16 @@
 \name{AnxietySleep-package}
 \alias{AnxietySleep}
 \alias{AnxietySleep-package}
-\title{Ansiedad y Confinamiento (2021)}
+\title{Proyecto Ansiedad y Confinamiento}
 \description{
-Herramientas complementarias para el análisis de los datos del estudio de
-ansiedad, calidad de sueño y confinamiento (2021).
+Herramientas complementarias para el análisis de los datos del proyecto de
+investigación sobre ansiedad, calidad de sueño y confinamiento.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/matcasti/proj.Anxiety2021}
-  \item Report bugs at \url{https://github.com/matcasti/proj.Anxiety2021/issues}
+  \item \url{https://github.com/NIM-ACh/AnxietySleep}
+  \item Report bugs at \url{https://github.com/NIM-ACh/AnxietySleep/issues}
 }
 
 }

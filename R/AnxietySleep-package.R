@@ -1,7 +1,7 @@
-#' Ansiedad y Confinamiento (2021)
+#' Proyecto Ansiedad y Confinamiento
 #'
-#' Herramientas complementarias para el análisis de los datos del estudio de
-#' ansiedad, calidad de sueño y confinamiento (2021).
+#' Herramientas complementarias para el análisis de los datos del proyecto de
+#' investigación sobre ansiedad, calidad de sueño y confinamiento.
 #'
 #' @keywords internal
 "_PACKAGE"

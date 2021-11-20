@@ -21,5 +21,4 @@ dataset[, cat_edad := factor(cat_edad, levels = c("18-25", "26-40", "41-50", ">5
 # Exportamos los datos ------------------------------------------------------------------------
 
 data.table::fwrite(dataset, file = "data-raw/dataset.csv")
-
 usethis::use_data(dataset, overwrite = TRUE)

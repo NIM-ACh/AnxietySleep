@@ -1,7 +1,7 @@
 #' Datos del estudio de ansiedad, calidad de sueño y confinamiento
 #'
-#' Herramientas complementarias para el análisis de los datos del estudio de
-#' ansiedad, calidad de sueño y confinamiento (2021).
+#' Herramientas complementarias para el análisis de los datos del proyecto de
+#' investigación sobre ansiedad, calidad de sueño y confinamiento.
 #'
 #' @format Un data frame con 625 filas y 6 variables:
 #'

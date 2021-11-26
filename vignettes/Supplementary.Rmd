@@ -74,8 +74,6 @@ library(gtsummary)
 
 # Figuras
 
-## Figura 1
-
 <details><summary>Ver código</summary>
 ```{r}
 # Eliminamos dos valores 
@@ -127,9 +125,7 @@ fig1 <- ggplot(data = dataset[i = eval(remove_outliers)],
 fig1
 ```
 
-
-
-## Figura 2
+**Figura 1**. Gráfico de densidad Kernel bidimensional con superposición de puntos entre el puntaje global del $\sqrt{PSQI}$ y $\sqrt{BAI}$ para EC y SC. Las líneas representan la mediana para cada eje.
 
 <details><summary>Ver código</summary>
 ```{r}
@@ -155,42 +151,60 @@ fig2 <- ggpubr::ggarrange(p1, p2, labels = c("A.", "B."), ncol = 1, hjust = 0)
 fig2
 ```
 
+**Figura 2**. Distribución bivariada: figura 2A muestra relación entre sexo y sintomatología ansiosa (BAI), $\ln(W)$ = 10.69, p < 0.001, $\widehat{r}_{biserial}$ = 0.21, CI~95%~[0.11, 0.31]; figura 2B indica relación entre sexo y calidad de sueño (PSQI), $\ln(W)$ = 10.7, p < 0.001, $\widehat{r}_{biserial}$ = 0.22, CI~95%~[0.12, 0.32]. La mediana de los valores es presentada con un punto rojo.
 
 # Tabla
 
-## Tabla 1
-
 <details><summary>Ver código</summary>
 ```{r}
+
+# Generamos los datos para la tabla
 tbl_data <- copy(dataset)[, `:=`(
   sexo = `attr<-`(sexo, "label", "Sexo"),
   beck_global = `attr<-`(beck_global, "label", "Puntaje BAI"),
   pits_global = `attr<-`(pits_global, "label", "Puntaje PSQI")
-)]
+)][]
 
+# Etiquetas en español
 gtsummary::theme_gtsummary_language("es")
 
-
-ec_tbl <- gtsummary::tbl_summary(tbl_data[zona == "EC"], 
-                       by = cat_edad, 
-                       include = c(sexo, beck_global, pits_global)) %>%
+# HAcemos la tabla para EC
+ec_tbl <- gtsummary::tbl_summary(
+  data = tbl_data[zona == "EC"], 
+  by = cat_edad, 
+  include = c(sexo, beck_global, pits_global),
+  statistic = gtsummary::all_continuous() ~ "{median} ({IQR})") %>%
   gtsummary::add_p(pvalue_fun = function(x) gtsummary::style_pvalue(x, digits = 3)) %>%
-  modify_header(update = gtsummary::all_stat_cols() ~ "**{level} años**<br>N = {n} ({style_percent(p)}%)")
+  gtsummary::modify_header(update = gtsummary::all_stat_cols() ~ "**{level} años**<br>N = {n} ({style_percent(p)}%)")
 
-sc_tbl <- gtsummary::tbl_summary(tbl_data[zona == "SC"], 
-                       by = cat_edad, 
-                       include = c(sexo, beck_global, pits_global)) %>%
+# Y la tabla para SC
+sc_tbl <- gtsummary::tbl_summary(
+  data = tbl_data[zona == "SC"], 
+  by = cat_edad, 
+  include = c(sexo, beck_global, pits_global),
+  statistic = gtsummary::all_continuous() ~ "{median} ({IQR})") %>%
   gtsummary::add_p(pvalue_fun = function(x) { gtsummary::style_pvalue(x, digits = 3) }) %>%
   gtsummary::modify_header(update = gtsummary::all_stat_cols() ~ "**{level} años**<br>N = {n} ({style_percent(p)}%)")
 
+# Fusionamos las tablas
 tbl <- gtsummary::tbl_stack(tbls = list(ec_tbl, sc_tbl), quiet = TRUE) %>%
   gtsummary::modify_footnote(gtsummary::everything() ~ NA_character_) %>%
   gtsummary::as_gt()
 
+# Añadimos los índices de significancia a las filas específicas
+tbl <- tbl %>% gt::text_transform(
+  locations = gt::cells_body(columns = "stat_1", rows = c(4,9)),
+  fn = function(i) paste0(i, "<sup>x</sup>")
+) %>% gt::text_transform(
+  locations = gt::cells_body(columns = "stat_2", rows = c(4)),
+  fn = function(i) paste0(i, "<sup>y</sup>")
+)
+
+# Añadimos etiquetas a los grupos de filas
 tbl <- tbl %>%
   gt::tab_spanner(label = gt::md("**Grupos etarios**"), columns = paste0("stat_", 1:4)) %>%
-  gt::tab_row_group(label = gt::md("**Zona - EC**"), rows = 1:5) %>%
-  gt::tab_row_group(label = gt::md("**Zona - SC**"), rows = 6:10)
+  gt::tab_row_group(label = gt::md("**Zona - SC**"), rows = 6:10) %>%
+  gt::tab_row_group(label = gt::md("**Zona - EC**"), rows = 1:5) 
 ```
 </details>
 
@@ -198,3 +212,4 @@ tbl <- tbl %>%
 tbl
 ```
 
+**Tabla 1**. Características sociodemográficas agrupadas por zonas, grupos etarios y parámetros psicométricos. Los valores son presentados por rango etario como *Mdn* (*IQR*) para puntaje de BAI y PSQI. Para las variables sexo y grupos (EC, en confinamiento; SC, sin confinamiento) se definen como n (%). El p-valor de cada variable corresponden a: a, prueba $\chi^2$ de *Pearson*; b, prueba de suma de rangos de *Wilcoxon*; x, indica *p* < 0.05, comparado con los otros grupos; y, indica *p* < 0.05 comparado con >50 años.

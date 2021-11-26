@@ -1,0 +1,256 @@
+---
+title: ""
+bibliography: "misc/ref.bib"
+csl: "misc/vancouver.csl"
+output: 
+  word_document:
+    reference_docx: "ref.docx"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  warning = FALSE, 
+  message = FALSE,
+  echo = FALSE,
+  error = FALSE,
+  dev = "pdf")
+
+# Importamos paquetes
+library(data.table)
+library(writR)
+library(ggplot2)
+library(ggExtra)
+
+# Funciones auxiliares
+.s <- `[`
+.get <- `[[`
+
+cor_label <- function(test) {
+  test |> 
+  as.data.table() |> 
+  .s(j = paste0(
+    "*S* = ", round(S), ", ",
+    "*p* ", style.p(p), ", ",
+    "$\\widehat{\\rho}$ = ", round(rho, 2), ", ",
+    "CI~95%~[", round(CI_low, 2), ", ", round(CI_high, 2), "]"
+  ))
+}
+
+# Cargamos los datos
+data <- readRDS(file = here::here("data/clean/data_clean.RDS"))
+```
+
+**Título**: Efecto del confinamiento sobre la sintomatología ansiosa y calidad de sueño en la población residente en latitud sur durante la pandemia de COVID-19.
+
+**Title**: Effect of confinement on anxiety symptoms and sleep quality in the population residing in southern latitude during the COVID-19 pandemic.
+
+**Autores**: Caren Alvarado-Aravena,^1,4^ Matías Castillo-Aguilar,^2,4^ Claudia Estrada-Goic,^3^ Cristian Núñez-Espinosa.^1,4^\*
+
+::: {custom-style="Afiliation"}
+^1^ Escuela de Medicina, Universidad de Magallanes, Punta Arenas, Chile.
+
+^2^ Kinesiology Department, University of Magallanes, Punta Arenas, Chile.
+
+^3^ Departamento de Psicología, Universidad de Magallanes, Punta Arenas, Chile.
+
+^4^ Austral Integrative Neurophysiology Group, Centro Asistencial de Docencia e Investigación, Universidad de Magallanes, Punta Arenas, Chile.
+:::
+
+### \*Autor de correspondencia: 
+
+Cristian Núñez-Espinosa, Escuela de Medicina, Universidad de Magallanes, Punta Arenas, Chile. Centro Asistencial de Docencia e Investigación CADI-UMAG, Chile. e-mail: cristian.nunez\@umag.cl. Dirección: Avenida Bulnes 01855, Casilla 113-D. Teléfono: 56 61 2201411.
+
+\newpage
+
+## Resumen:  
+
+**Objetivo**: conocer el efecto del confinamiento sobre la ansiedad y calidad de sueño en población residente en latitud sur durante la pandemia de COVID-19 **Material y métodos**: El Inventario de Ansiedad de Beck y el índice de calidad de sueño de Pittsburgh fue aplicado a 617 personas de los cuales 458 [74.2%] fueron mujeres. La muestra se agrupó según zona de confinamiento (EC) (287 sujetos; 46.5%) y zona sin confinamiento (SC) (330 sujetos; 53.5%), además de cuatro grupos etarios (18-25 años; 26-40 años; 41-50 años; más de 50 años). **Resultados**: El grupo EC presenta mayor sintomatología ansiosa que el grupo SC (p<0.01) como también peor calidad de sueño (p<0.01). En relación al sexo, las mujeres presentaron mayor ansiedad y peor calidad de sueño que los hombres. Al analizar el efecto de ansiedad sobre la calidad de sueño, se hallo que el incremento en 1 unidad en el puntaje transformado de ansiedad se asoció a un aumento en 0.24 unidades en el puntaje transformado de calidad de sueño tras controlar por la influencia del sexo.  **Conclusión**: La población en confinamiento presentan mayor sintomatología ansiosa y peor calidad de sueño que la población sin confinamiento, ocurriendo la misma diferencia al comparar a mujeres y hombres, respectivamente. Los adultos jóvenes entre 18-25 años presentan mayor ansiedad que otros grupos etarios.
+
+**Palabras clave**: Ansiedad, Calidad de Sueño, COVID-19, Salud Mental.
+
+\newpage
+
+# Introducción: 
+
+La pandemia global del SARS-CoV-2 ha llevado a un nuevo estilo de vida bajo restricciones sanitarias y períodos de confinamiento que ha afectado la salud y la calidad de vida de la población mundial [@world2020coronavirus]. La rápida disipación de la enfermedad por Coronavirus 2019 (COVID-19) ha provocado que los gobiernos implementes distintas estrategias para prevenir un número masivo de muertes, favoreciendo el confinamiento y aislamiento de la población [@perea2021lock]. Esta situación sumada a la incertidumbre, inestabilidad socioeconómica, el miedo y otros factores sociales han repercutido fuertemente en el deterioro de la salud mental de la población [@sher2020covid; @vindegaard2020covid]. 
+
+En la actualidad, múltiples investigaciones están centradas en vislumbrar lo que parece ser una de las mayores consecuencias que la pandemia ha producido en el ser humano: el impacto psicológico [@talevi2020mental]. Tanto las personas que han respetado el distanciamiento social y que no han sido infectadas, como también los pacientes recuperados de COVID-19, han experimentado secuelas de un estrés psicológico, manifestado principalmente en sintomatología ansiosa [@talevi2020mental; @zhang2020impact; @wang2020immediate]. La ansiedad, que puede condicionarse por vivir en alta latitud [@alvarado2021sintomatologia], también se manifiesta negativamente a nivel físico y psicológico, provocando alteraciones del sueño [@mcmakin2015sleep; @gould2018association]. Esto enciende una alarma, dado que la regulación del sueño es clave para una regulación óptima del sistema inmune [@irwin2017sleep; @besedovsky2019sleep], así como también lo es la sintomatología ansiosa [@mckay2020anxiety]. Se ha observado que la comunicación cruzada de ambos sistemas y las defensas inmunológicas de nuestro organismo tienen directa relación con la respuesta frente a infecciones respiratorias, disminuyendo la tasa de infecciones en aquellas personas que presentan mejor calidad de sueño y menor índice de ansiedad [@prather2015behaviorally; @cohen2009sleep; @besedovsky2015sleep; @mckay2020anxiety].
+
+Un reciente estudio de la Universidad en Adelaida, Australia, después de 35 años de investigación, corroboró los factores psicosociales que mejor predicen quienes son más propensos a padecer de una infección respiratoria luego de estar expuestos a un patógeno; donde encontraron que el riesgo de infección estaban asociados al estrés psicológico crónico, siendo un factor protector un sueño adecuado y eficiente, sugiriendo que estas variables podrían jugar un rol similar en el riesgo de infección por COVID-19 [@cohen2021psychosocial]. Sabiendo la importancia de un buen descanso mediado por una óptima calidad de sueño, se hace necesario conocer qué elementos pueden asociarse a un mejor estado psicosocial.
+
+La aparición o exacerbación de sintomatología ansiosa como el empeoramiento de la calidad de sueño se ven favorecidas por situaciones de confinamiento  [@idrissi2020sleep]. Además, la edad y el sexo parecen ser dos factores influentes en esta condición, donde las personas menores de 35 años y las mujeres son las que presentan peores puntajes en escalas de ansiedad y calidad de sueño  [@pieh2020effect].
+
+AActualmente, muchas ciudades oscilan en períodos de confinamiento, que pueden incidir en favorecer un estado ansioso y una mala calidad de sueño, deteriorando la salud física y psicológica de las personas. A pesar de la importancia de esta problemática, no existen estudios en latitud sur comparen estas variables. Por lo tanto, este estudio plantea como objetivo, conocer el efecto del confinamiento sobre la ansiedad y calidad de sueño en población residente en latitud sur durante la pandemia de COVID-19.
+
+
+# Material y métodos
+
+## Diseño
+
+Este estudio utilizó un diseño transversal observacional descriptivo. El muestreo fue de tipo no probabilístico de bola de nieve, asegurándonos encuestar a todos los participantes dentro de la misma zona geográfica en latitud sur. La muestra se agrupo en: un grupo que vivía en zona de confinamiento (EC), el cual estuvo compuesto por un total de 287 sujetos (46.5%) y un grupo que vivía en zona sin confinamiento (SC) el cual estuvo compuesto por 330 sujetos (53.5%). Además se crearon cuatro grupos etarios para comparar por edades: 18-25 años (28.8%); 26-40 años (34.4%); 41-50 años (20.9%); más de 50 años (15.9%). 
+
+## Participantes
+
+<!-- Descriptivos generales: muestra total, edad promedio, cantidad de mujeres, cantidad por región. -->
+```{r participantes, eval=FALSE}
+data[j = .(edad = cent_disp(edad), .N)]
+data[j = .(.N, `%` = round(.N/nrow(data)*100, 1)), by = sexo]
+data[j = .(.N, `%` = round(.N/nrow(data)*100, 1)), by = region]
+```
+
+Un total de 617 personas (edad: *Mdn* = 34, *IQR* = 22) participaron en este estudio, de los cuales  458 [74.2%] fueron mujeres. Los participantes fueron reclutados de la misma zona geográfica de latitud sur, debiendo cumplir con los siguientes criterios de inclusión: ser mayor de 18 años, ser de nacionalidad chilena, no estar utilizando fármacos ansiolíticos y/o somníferos. Aquellas personas que no completaran el formulario en su totalidad serían excluidas del estudio. El estudio fue aprobado por el Comité de Ética de Investigación de la Universidad de Magallanes (N°025/CEC/2020) y se realizó de acuerdo con la Declaración de Helsinki sobre los principios éticos en seres humanos.
+
+
+## Instrumentos
+
+### Ansiedad
+
+El grado de ansiedad fue determinado a través del Inventario de Ansiedad de Beck (BAI) en su adaptación al español [@sanz2003propiedades]. Este instrumento es auto-administrado, posee 21 ítems con 4 opciones de respuesta con escala tipo Likert que fluctúa entre el 0 y el 3. La categorización se representa de la siguiente manera: 0-7 = ansiedad mínima, 8-15 = ansiedad baja, 16-25 = ansiedad moderada, 26-63 = ansiedad severa [@starosta2017beck].
+
+### Calidad de sueño
+
+Para determinar la calidad de sueño se utilizó el índice de calidad de sueño de Pittsburgh (Pittsburgh sleep quality index - PSQI) en su versión validada en español [@jimenez2008confiabilidad]. Este instrumento es de auto-aplicación y contiene los siguientes componentes: calidad subjetiva del sueño, latencia del sueño, duración del sueño, eficiencia habitual del sueño, alteraciones del sueño, uso de medicamentos para dormir y disfunción diurna. El puntaje parcial de cada componente va de 0 a 3, siendo 0 = bastante bueno; 1 = bueno; 2 = malo; y 3 =bastante malo. El puntaje global es la suma de los 7 componentes y este fluctúa entre los 0 y 21 puntos. En el análisis, aquellas personas que obtengan un puntaje global menor o igual a 5 indica una buena calidad de sueño, mientras que superior a 5 señala a aquellas personas con mala calidad de sueño.
+
+## Procedimiento
+
+Los datos se obtuvieron a partir de un cuestionario, el cual fue aplicado desde el 14 de septiembre de 2020 hasta el 12 de octubre del mismo año, durante la pandemia por COVID-19. El mismo formulario se utilizó para recopilar las respuestas de ambas zonas y fue aplicado al mismo tiempo.
+
+En la primera página se mostró el consentimiento informado para que sea leído detenidamente por el participante voluntario y luego se preguntó si está de acuerdo en participar de la investigación, presentando dos opciones "Sí, estoy de acuerdo" o "No, no estoy de acuerdo".
+
+En la página dos del formulario se pidieron datos sociodemográficos del participante, tales como: edad, género, región de residencia actual, indicando si había medidas de cuarentena en su zona y, por último, con cuántas personas convive. También se solicitaron datos de anamnesis remota: presencia de trastorno ansioso y/o del sueño clínicamente diagnosticado y, uso de tratamiento farmacológico (ansiolíticos y/o somníferos).
+Por último, en las páginas tres y cuatro se aplicaron las pruebas de ansiedad y calidad de sueño, respectivamente.
+
+## Análisis estadístico
+
+<!-- Describir la formación de grupos etarios  -->
+Para la descripción de las variables continuas se usó la mediana (*Mdn*) y el rango intercuartil (*IQR*), mientras que para las variables categóricas se usó la frecuencia absoluta (n) y relativa (%). En la comparación entre grupos, se procedió a usar estadística no paramétrica debido a la violación del supuesto de normalidad en la distribución, la cual fue comprobada analíticamente usando la prueba de *Kolmogorov-Smirnov*.
+
+Para evaluar la diferencia de los índices del PSQI y del BAI entre pares de grupos se utilizó la prueba de suma de rangos de *Wilcoxon* ($\ln(W)$), mientras que la prueba de suma de rangos de *Kruskal-Wallis* ($\chi^2_{~Kruskal-Wallis}$) se utilizó para comparar los rangos medios entre grupos etarios, los cuales fueron creados a partir de la edad como variable continua. Para comprobar la independencia por pares de factores se usó la prueba chi-cuadrado de *Pearson* ($\chi^2_{~Pearson}$). 
+
+Para explorar el efecto del confinamiento controlando por la influencia del sexo, así como para evaluar el impacto de la ansiedad sobre la calidad de sueño, ajustamos un modelo lineal para el análisis de la varianza (ANOVA), normalizando las variables dependientes utilizando para tal efecto la raíz cuadrada del PSQI ($\sqrt{PSQI}$) y BAI ($\sqrt{BAI}$), de manera que los residuales de dichos modelos siguieran una distribución normal, comprobando del mismo modo la homogeneidad de varianzas usando la prueba de *Levene*.
+
+Como estimadores del tamaño del efecto (ES), se usó la correlación biserial para la prueba de *Wilcoxon* ($\widehat{r}_{biserial}$), epsilon-cuadrado para la prueba de *Kruskal-Wallis* ($\widehat{\epsilon}^2$) y eta-cuadrado parcial ($\eta^2_p$) para ANOVA.
+
+Para el rechazo de la hipótesis nula, se planteó que la probabilidad de cometer un error tipo I ($\alpha$) fuese menor o igual al 5%, (i.e. p ≤ 0.05), como evidencia suficiente para la significancia estadística. El análisis estadístico se realizó usando el lenguaje de programación *R* en su versión 4.1.1 [@rlanguage] en la interfaz gráfica de RStudio [@rstudio].
+
+# Resultados
+
+<!-- Diferencia entre ansiedad y grupo etario, región, sexo y mascota -->
+```{r ansiedad-por-grupos, eval=FALSE}
+# Sexo
+data[, cent_disp(beck_global), sexo]; autest(data, "sexo", "beck_global", markdown = T)$full |> cat()
+data[, cent_disp(pits_global), sexo]; autest(data, "sexo", "pits_global", markdown = T)$full |> cat()
+
+# Región
+data[, cent_disp(beck_global), region]; autest(data, "region", "beck_global", markdown = T)$full |> cat()
+data[, cent_disp(pits_global), region]; autest(data, "region", "pits_global", markdown = T)$full |> cat()
+
+# Grupos etarios
+data[, cent_disp(beck_global), cat_edad]; autest(data, "cat_edad", "beck_global", markdown = T)$full |> cat()
+pairs_two_sample(data, "cat_edad", "beck_global")[j = lablr(.SD, T)$full, by = .(group1, group2)]
+
+data[, cent_disp(pits_global), cat_edad]; autest(data, "cat_edad", "pits_global", markdown = T)$full |> cat()
+
+data[, .N, by = n_personas_convive] 
+
+data[, cent_disp(beck_global), by = n_personas_convive] 
+autest(data, x = "n_personas_convive", y = "beck_global", paired = FALSE)
+pairs_two_sample(data, x = "n_personas_convive", y = "beck_global")[p.value <= 0.05]
+
+autest(data, x = "n_personas_convive", y = "pits_global")
+
+```
+
+En relación a la sintomatología ansiosa, hallamos que las personas del grupo EC (*Mdn* = 9, *IQR* = 13) obtuvieron puntajes medios mayores que aquellas personas del grupo SC (*Mdn* = 5, *IQR* = 9), $\ln(W)$ = 10.89, *p* = 0.006, $\widehat{r}_{biserial}$ = 0.13, CI~95%~[0.04, 0.22]; observando el mismo patrón con los puntajes medios del PSQI, donde el grupo EC puntuó más alto (*Mdn* = 9, *IQR* = 6) que el grupo SC (*Mdn* = 8, *IQR* = 6), $\ln(W)$ = 10.89, *p* = 0.006, $\widehat{r}_{biserial}$ = 0.13, CI~95%~[0.04, 0.22].
+
+Al explorar el efecto del sexo sobre la sintomatología ansiosa, observamos que las mujeres calificaron con puntajes mayores al de los hombres en el BAI (mujeres: *Mdn* = 7, *IQR* = 12; hombres: *Mdn* = 5, *IQR* = 9), $\ln(W)$ = 10.69, *p* < 0.001, $\widehat{r}_{biserial}$ = 0.21, CI~95%~[0.11, 0.31]. Sin embargo, después de ajustar por la presencia del confinamiento, hallamos que el efecto del sexo sobre la sintomatología ansiosa es mayor en el grupo EC ($\widehat{r}_{biserial}$ = 0.23, CI~95%~[0.08, 0.38]) comparado con el grupo SC ($\widehat{r}_{biserial}$ = 0.15, CI~95%~[0.02, 0.28]). Se observó el mismo efecto con la calidad de sueño, en donde las mujeres nuevamente calificaron con mayores puntajes del PSQI comparado con sus pares del sexo opuesto (mujeres: *Mdn* = 9, *IQR* = 6; hombres: *Mdn* = 7, *IQR* = 5.5), $\ln(W)$ = 10.70, *p* < 0.001, $\widehat{r}_{biserial}$ = 0.22, CI~95%~[0.12, 0.32], donde al controlar por grupos de confinamiento, observamos diferencias en la magnitud del efecto del sexo, aunque esta vez fue en SC donde el efecto del sexo sobre la calidad de sueño fue mayor (SC: $\widehat{r}_{biserial}$ = 0.22, CI~95%~[0.09, 0.35]; CC: $\widehat{r}_{biserial}$ = 0.19, CI~95%~[0.03, 0.34]). El resto de características sociodemográficas pueden apreciarse en la [Tabla 1](#tab1).
+
+```{r regresion, eval=FALSE}
+# beck_global
+lm(sqrt(beck_global) ~ sexo + region, data) |> anova() |> report::report_statistics()
+
+# pits_global
+lm(sqrt(pits_global) ~ sexo + region, data) |> anova() |> report::report_statistics()
+
+data[-599,.SD, .SDcols = \(i) is.numeric(i) & all(!is.na(i))][-44] |> 
+  cluster::pam(3) |> 
+  factoextra::fviz_cluster(
+    data = data[-599,.SD, .SDcols = \(i) is.numeric(i) & all(!is.na(i))][-44],
+  )
+```
+
+Tras evaluar el impacto del confinamiento sobre las variables transformadas usando ANOVA, luego de controlar por la influencia del sexo, observamos que este mantuvo un efecto significativo sobre $\sqrt{BAI}$ (*F*(1, 614) = 30.08, *p* < 0.001; $\eta^2_p$ = 0.05, CI~95%~[0.02, 1.00]), y sobre $\sqrt{PSQI}$, *F*(1, 614) = 5.61, *p* = 0.018; $\eta^2_p$ = 9.05e-03, CI~95%~[8.17e-04, 1.00]. La distribución bivariada y la naturaleza cuantitativa de las variables transformadas para EC y SC pueden apreciarse en la [Figura 1](#fig1).
+
+```{r correlation, eval=FALSE}
+model <- copy(data)[, `:=`(
+  Sexo = factor(sexo, levels = c("Hombre", "Mujer")),
+  BAI = beck_global,
+  PSQI = pits_global
+)] |> lm(formula = sqrt(PSQI) ~ Sexo + sqrt(BAI))
+
+model |> equatiomatic::extract_eq(use_coefs = TRUE)
+
+par(mfrow = c(3,2))
+model |> plot(1:6)
+par(mfrow = c(1,1))
+
+model |> report::report() 
+model |> summary()
+
+# Supuestos del modelo
+model |> performance::check_collinearity()
+model |> performance::check_autocorrelation()
+model |> performance::check_heteroscedasticity()
+
+```
+
+Al analizar el efecto de $\sqrt{BAI}$ sobre $\sqrt{PSQI}$ mediante la implementación de un modelo de regresión lineal múltiple, hallamos que el incremento en 1 unidad en $\sqrt{BAI}$, se asoció a un aumento en 0.24 unidades en $\sqrt{PSQI}$ tras controlar por la influencia del sexo (CI~95%~[0.21, 0.27], *t*(614) = 15.94, *p* < 0.001;), lo que se expresa de mejor manera en la [Ecuación 1](#eq1). Este modelo explica una proporción estadísticamente significativa y sustancial de la varianza (R^2^ = 0.31, *F*(2, 614) = 140.1, *p* < 0.001, R^2^ ajustado = 0.31).
+
+$$\widehat{\sqrt{PSQI}} = 2.14 + 0.13(Sexo_{Mujer}) + 0.24(\sqrt{BAI})$$
+[**Ecuación 1**]{#eq1}. Modelo de regresión lineal múltiple, considerando la influencia del sexo y la sintomatología ansiosa sobre la calidad de sueño.
+
+# Discusión
+
+A casi dos años de la pandemia de COVID-19, existen una constante preocupación científica por dimensionar el impacto del confinamiento sobre la salud mental  [@idrissi2020sleep; @suso2020much]. En los resultados de este estudio se pudo evidenciar que el confinamiento genera efectos negativos sobre la sintomatología ansiosa y la calidad de sueño de la población general en zona de latitud sur.
+
+Al comparar las zonas EC y SC, la primera, presentó mayores puntajes en BAI y PSQI. Aunque estos resultados se asemejan a los estudios realizados en estas mismas variables en países europeos y asiáticos  [@saunders2021understanding; @cheikh2021impact], en zonas de latitud sur de Latinoamérica no se contaban con registros que confirmaran el efecto negativo del confinamiento sobre esta población.
+
+Las mujeres tuvieron mayor índice de ansiedad en comparación a sus pares del sexo opuesto, ya sea en zona EC o SC; lo cual se ha visto en estudios realizados en Austria y Brasil  [@pieh2020effect; @campos2020early]. EEsto puede deberse a que las mujeres tienen mayor riesgo de presentar distintas enfermedades de salud mental producto de la heredabilidad genética, efectos hormonales fisiológicos y factores propios del ambiente [@alexander2007women; @hodes2019sex].
+
+En el ámbito de la calidad de sueño, las mujeres fueron las que puntuaron más alto en los puntajes de PSQI, lo que se traduce en una peor calidad de sueño y, al controlar por zonas, fue peor en las mujeres que estaban SC. Hipotetizamos que, si bien ha habido un cambio social respecto a la función de la mujer en la sociedad, su rol laboral, a la par con su rol dentro del hogar, puede genera una sobrecarga emocional y una mala calidad de sueño  [@oliver2020covid19impact; @shah2021prevalence], lo cual se podría aminorar en el caso de encontrarse en confinamiento.  Dentro del mismo punto, es interesante observar que a través de la puntuación de sintomatología ansiosa se crea un modelo predictivo de la calidad de sueño, donde se puede apreciar una relación lineal entre estas dos variables, el cual determina que, por cada aumento en la raíz cuadrada del puntaje de BAI, aumenta el puntaje de PSQI transformado, traduciéndose en que, a mayor sintomatología ansiosa, peor es la calidad de sueño.  
+
+Respecto a los grupos etarios de este estudio, es interesante observar que existen diferencias entre ellos respecto a la presencia de sintomatología ansiosa. El grupo más joven de la población de estudio, 18-25 años, obtuvo mayores puntajes de ansiedad con respecto a los demás grupos. Esto puede deberse a que los adultos jóvenes poseen mayor acceso a plataformas digitales e internet, por lo tanto, pueden obtener cualquier tipo de información de manera rápida, todo esto sin considerar que a nivel mundial existe un grado de adicción al internet en adultos jóvenes [@mihajlov2017internet; @galvis2019analisis]. Sin embargo, también es un grupo que mayoritariamente pudiera estar cursando estudios universitarios, donde este es un gran factor estresor debido a las clases online y la incertidumbre de los semestres académicos  [@mena2021educabilidad]. 
+
+La gran mayoría de estudios que investigaron el efecto del aislamiento social sobre la salud mental de la población general buscaron resultados pre y post confinamiento o hicieron comparaciones entre sus resultados con datos previos a la pandemia por COVID-19  [@pieh2020effect; @gismero2020emotional; @canet2020longitudinal], donde se evidenció que algunos factores como el tiempo y estación del año no estuvieron controladas. Este estudio realizó comparaciones en el mismo período de tiempo en zona de latitud sur que estaba EC o SC, lo cual permite tener en cuenta estos factores mencionados, donde se pudo concluir que el estado EC puede generar sintomatología ansiosa y empeorar la calidad de sueño, lo cual también puede verse presente en las mujeres y en los grupos etarios más jóvenes. 
+
+Algunas de las limitaciones del estudio es que hubo factores que no se pudieron controlar, por ejemplo, la composición del núcleo familiar, la presencia de deudas económicas, violencia doméstica, entre otros; los cuales pueden ser importantes factores estresores que generen aumento de la sintomatología ansiosa y, al mismo tiempo, alteraciones en la calidad de sueño. Por otro lado, la aplicación online del cuestionario puede generar mal interpretaciones de algunas preguntas, ya que no se pudieron resolver dudas de manera inmediata durante la aplicación de los cuestionarios, pudiendo afectar a los resultados. 
+
+Por último, es importante realizar más investigaciones en esta temática con foco a diseños longitudinales y de tipo experimentales, idealmente asegurando una población homogénea con un muestreo aleatorizado, ya que la naturaleza observacional de corte transversal de este estudio no permite realizar inferencias de tipo causal entre los factores de análisis sino de tipo asociativo. 
+
+# Conclusión
+
+La población en confinamiento presenta mayor sintomatología ansiosa y peor calidad de sueño que la población sin confinamiento, ocurriendo la misma diferencia al comparar a mujeres y hombres, respectivamente. Los adultos jóvenes entre 18-25 años presentan mayor ansiedad que otros grupos etarios.
+
+# Conflictos de interés
+
+Los autores de este estudio declaran no tener conflictos de interés. 
+
+# Referencias
+
+<div id="refs"></div>
+
+\newpage
+
+# Anexos
+
+**Tabla 1**. poner algo.
+
+\newpage
+
+**Figura 1**. otra cosa.
+
+\newpage
+
+**Figura 2**. otra cosa.

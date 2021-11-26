@@ -198,6 +198,12 @@ tbl <- tbl %>% gt::text_transform(
 ) %>% gt::text_transform(
   locations = gt::cells_body(columns = "stat_2", rows = c(4)),
   fn = function(i) paste0(i, "<sup>y</sup>")
+) %>% gt::text_transform(
+  locations = gt::cells_body(columns = "p.value", rows = c(1,6)),
+  fn = function(i) paste0(i, "<sup>a</sup>")
+) %>% gt::text_transform(
+  locations = gt::cells_body(columns = "p.value", rows = c(4:5,9:10)),
+  fn = function(i) paste0(i, "<sup>b</sup>")
 )
 
 # Añadimos etiquetas a los grupos de filas

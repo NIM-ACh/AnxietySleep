@@ -136,9 +136,6 @@
 <div id="figuras" class="section level1">
 <h1 class="hasAnchor">
 <a href="#figuras" class="anchor"></a>Figuras</h1>
-<div id="figura-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#figura-1" class="anchor"></a>Figura 1</h2>
 <details><p><summary>Ver código</summary></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Eliminamos dos valores </span>
@@ -184,10 +181,7 @@
         ggside.panel.scale.x <span class="op">=</span> <span class="fl">.15</span>,
         ggside.panel.scale.y <span class="op">=</span> <span class="op">(</span><span class="fl">.15</span> <span class="op">*</span> <span class="fl">3</span> <span class="op">/</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </details><p><img src="Supplementary_files/figure-html/unnamed-chunk-3-1.png" width="100%"></p>
-</div>
-<div id="figura-2" class="section level2">
-<h2 class="hasAnchor">
-<a href="#figura-2" class="anchor"></a>Figura 2</h2>
+<p><strong>Figura 1</strong>. Gráfico de densidad Kernel bidimensional con superposición de puntos entre el puntaje global del <span class="math inline">\(\sqrt{PSQI}\)</span> y <span class="math inline">\(\sqrt{BAI}\)</span> para EC y SC. Las líneas representan la mediana para cada eje.</p>
 <details><p><summary>Ver código</summary></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">ggstatsplot</span><span class="fu">::</span><span class="fu"><a href="https://indrajeetpatil.github.io/ggstatsplot/reference/ggbetweenstats.html">ggbetweenstats</a></span><span class="op">(</span>
@@ -206,51 +200,67 @@
 
 <span class="va">fig2</span> <span class="op">&lt;-</span> <span class="fu">ggpubr</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/ggpubr/reference/ggarrange.html">ggarrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A."</span>, <span class="st">"B."</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">1</span>, hjust <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></code></pre></div>
 </details><p><img src="Supplementary_files/figure-html/unnamed-chunk-5-1.png" width="100%"></p>
-</div>
+<p><strong>Figura 2</strong>. Distribución bivariada: figura 2A muestra relación entre sexo y sintomatología ansiosa (BAI), <span class="math inline">\(\ln(W)\)</span> = 10.69, p &lt; 0.001, <span class="math inline">\(\widehat{r}_{biserial}\)</span> = 0.21, CI<sub>95%</sub>[0.11, 0.31]; figura 2B indica relación entre sexo y calidad de sueño (PSQI), <span class="math inline">\(\ln(W)\)</span> = 10.7, p &lt; 0.001, <span class="math inline">\(\widehat{r}_{biserial}\)</span> = 0.22, CI<sub>95%</sub>[0.12, 0.32]. La mediana de los valores es presentada con un punto rojo.</p>
 </div>
 <div id="tabla" class="section level1">
 <h1 class="hasAnchor">
 <a href="#tabla" class="anchor"></a>Tabla</h1>
-<div id="tabla-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tabla-1" class="anchor"></a>Tabla 1</h2>
 <details><p><summary>Ver código</summary></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span><span class="op">[</span>, <span class="fu">`:=`</span><span class="op">(</span>
+<code class="sourceCode R">
+<span class="co"># Generamos los datos para la tabla</span>
+<span class="va">tbl_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://Rdatatable.gitlab.io/data.table/reference/copy.html">copy</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span><span class="op">[</span>, <span class="fu">`:=`</span><span class="op">(</span>
   sexo <span class="op">=</span> <span class="fu">`attr&lt;-`</span><span class="op">(</span><span class="va">sexo</span>, <span class="st">"label"</span>, <span class="st">"Sexo"</span><span class="op">)</span>,
   beck_global <span class="op">=</span> <span class="fu">`attr&lt;-`</span><span class="op">(</span><span class="va">beck_global</span>, <span class="st">"label"</span>, <span class="st">"Puntaje BAI"</span><span class="op">)</span>,
   pits_global <span class="op">=</span> <span class="fu">`attr&lt;-`</span><span class="op">(</span><span class="va">pits_global</span>, <span class="st">"label"</span>, <span class="st">"Puntaje PSQI"</span><span class="op">)</span>
-<span class="op">)</span><span class="op">]</span>
+<span class="op">)</span><span class="op">]</span><span class="op">[</span><span class="op">]</span>
 
+<span class="co"># Etiquetas en español</span>
 <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/theme_gtsummary.html">theme_gtsummary_language</a></span><span class="op">(</span><span class="st">"es"</span><span class="op">)</span>
 
-
-<span class="va">ec_tbl</span> <span class="op">&lt;-</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span><span class="va">tbl_data</span><span class="op">[</span><span class="va">zona</span> <span class="op">==</span> <span class="st">"EC"</span><span class="op">]</span>, 
-                       by <span class="op">=</span> <span class="va">cat_edad</span>, 
-                       include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">sexo</span>, <span class="va">beck_global</span>, <span class="va">pits_global</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+<span class="co"># HAcemos la tabla para EC</span>
+<span class="va">ec_tbl</span> <span class="op">&lt;-</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="va">tbl_data</span><span class="op">[</span><span class="va">zona</span> <span class="op">==</span> <span class="st">"EC"</span><span class="op">]</span>, 
+  by <span class="op">=</span> <span class="va">cat_edad</span>, 
+  include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">sexo</span>, <span class="va">beck_global</span>, <span class="va">pits_global</span><span class="op">)</span>,
+  statistic <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/select_helpers.html">all_continuous</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"{median} ({IQR})"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/add_p.html">add_p</a></span><span class="op">(</span>pvalue_fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/style_pvalue.html">style_pvalue</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/modify.html">modify_header</a></span><span class="op">(</span>update <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/select_helpers.html">all_stat_cols</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**{level} años**&lt;br&gt;N = {n} ({style_percent(p)}%)"</span><span class="op">)</span>
+  <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/modify.html">modify_header</a></span><span class="op">(</span>update <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/select_helpers.html">all_stat_cols</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**{level} años**&lt;br&gt;N = {n} ({style_percent(p)}%)"</span><span class="op">)</span>
 
-<span class="va">sc_tbl</span> <span class="op">&lt;-</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span><span class="va">tbl_data</span><span class="op">[</span><span class="va">zona</span> <span class="op">==</span> <span class="st">"SC"</span><span class="op">]</span>, 
-                       by <span class="op">=</span> <span class="va">cat_edad</span>, 
-                       include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">sexo</span>, <span class="va">beck_global</span>, <span class="va">pits_global</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+<span class="co"># Y la tabla para SC</span>
+<span class="va">sc_tbl</span> <span class="op">&lt;-</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_summary.html">tbl_summary</a></span><span class="op">(</span>
+  data <span class="op">=</span> <span class="va">tbl_data</span><span class="op">[</span><span class="va">zona</span> <span class="op">==</span> <span class="st">"SC"</span><span class="op">]</span>, 
+  by <span class="op">=</span> <span class="va">cat_edad</span>, 
+  include <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">sexo</span>, <span class="va">beck_global</span>, <span class="va">pits_global</span><span class="op">)</span>,
+  statistic <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/select_helpers.html">all_continuous</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"{median} ({IQR})"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/add_p.html">add_p</a></span><span class="op">(</span>pvalue_fun <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/style_pvalue.html">style_pvalue</a></span><span class="op">(</span><span class="va">x</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/modify.html">modify_header</a></span><span class="op">(</span>update <span class="op">=</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/select_helpers.html">all_stat_cols</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="st">"**{level} años**&lt;br&gt;N = {n} ({style_percent(p)}%)"</span><span class="op">)</span>
 
+<span class="co"># Fusionamos las tablas</span>
 <span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/tbl_stack.html">tbl_stack</a></span><span class="op">(</span>tbls <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">ec_tbl</span>, <span class="va">sc_tbl</span><span class="op">)</span>, quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/modify.html">modify_footnote</a></span><span class="op">(</span><span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html">everything</a></span><span class="op">(</span><span class="op">)</span> <span class="op">~</span> <span class="cn">NA_character_</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gtsummary</span><span class="fu">::</span><span class="fu"><a href="http://www.danieldsjoberg.com/gtsummary//reference/as_gt.html">as_gt</a></span><span class="op">(</span><span class="op">)</span>
 
+<span class="co"># Añadimos los índices de significancia a las filas específicas</span>
+<span class="va">tbl</span> <span class="op">&lt;-</span> <span class="va">tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/text_transform.html">text_transform</a></span><span class="op">(</span>
+  locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="st">"stat_1"</span>, rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">9</span><span class="op">)</span><span class="op">)</span>,
+  fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">i</span>, <span class="st">"&lt;sup&gt;x&lt;/sup&gt;"</span><span class="op">)</span>
+<span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/text_transform.html">text_transform</a></span><span class="op">(</span>
+  locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="st">"stat_2"</span>, rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span>,
+  fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">i</span>, <span class="st">"&lt;sup&gt;y&lt;/sup&gt;"</span><span class="op">)</span>
+<span class="op">)</span>
+
+<span class="co"># Añadimos etiquetas a los grupos de filas</span>
 <span class="va">tbl</span> <span class="op">&lt;-</span> <span class="va">tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"**Grupos etarios**"</span><span class="op">)</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"stat_"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html">tab_row_group</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"**Zona - EC**"</span><span class="op">)</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html">tab_row_group</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"**Zona - SC**"</span><span class="op">)</span>, rows <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
-</details><div id="prxyyaupla" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html">tab_row_group</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"**Zona - SC**"</span><span class="op">)</span>, rows <span class="op">=</span> <span class="fl">6</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span>
+  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html">tab_row_group</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html">md</a></span><span class="op">(</span><span class="st">"**Zona - EC**"</span><span class="op">)</span>, rows <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> </code></pre></div>
+</details><div id="issyirater" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#prxyyaupla .gt_table {
+#issyirater .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -275,7 +285,7 @@
   border-left-color: #D3D3D3;
 }
 
-#prxyyaupla .gt_heading {
+#issyirater .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -287,7 +297,7 @@
   border-right-color: #D3D3D3;
 }
 
-#prxyyaupla .gt_title {
+#issyirater .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -297,7 +307,7 @@
   border-bottom-width: 0;
 }
 
-#prxyyaupla .gt_subtitle {
+#issyirater .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -307,13 +317,13 @@
   border-top-width: 0;
 }
 
-#prxyyaupla .gt_bottom_border {
+#issyirater .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#prxyyaupla .gt_col_headings {
+#issyirater .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -328,7 +338,7 @@
   border-right-color: #D3D3D3;
 }
 
-#prxyyaupla .gt_col_heading {
+#issyirater .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -348,7 +358,7 @@
   overflow-x: hidden;
 }
 
-#prxyyaupla .gt_column_spanner_outer {
+#issyirater .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -360,15 +370,15 @@
   padding-right: 4px;
 }
 
-#prxyyaupla .gt_column_spanner_outer:first-child {
+#issyirater .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#prxyyaupla .gt_column_spanner_outer:last-child {
+#issyirater .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#prxyyaupla .gt_column_spanner {
+#issyirater .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -380,7 +390,7 @@
   width: 100%;
 }
 
-#prxyyaupla .gt_group_heading {
+#issyirater .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -402,7 +412,7 @@
   vertical-align: middle;
 }
 
-#prxyyaupla .gt_empty_group_heading {
+#issyirater .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -417,15 +427,15 @@
   vertical-align: middle;
 }
 
-#prxyyaupla .gt_from_md > :first-child {
+#issyirater .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#prxyyaupla .gt_from_md > :last-child {
+#issyirater .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#prxyyaupla .gt_row {
+#issyirater .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -444,7 +454,7 @@
   overflow-x: hidden;
 }
 
-#prxyyaupla .gt_stub {
+#issyirater .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -456,7 +466,7 @@
   padding-left: 12px;
 }
 
-#prxyyaupla .gt_summary_row {
+#issyirater .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -466,7 +476,7 @@
   padding-right: 5px;
 }
 
-#prxyyaupla .gt_first_summary_row {
+#issyirater .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -476,7 +486,7 @@
   border-top-color: #D3D3D3;
 }
 
-#prxyyaupla .gt_grand_summary_row {
+#issyirater .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -486,7 +496,7 @@
   padding-right: 5px;
 }
 
-#prxyyaupla .gt_first_grand_summary_row {
+#issyirater .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -496,11 +506,11 @@
   border-top-color: #D3D3D3;
 }
 
-#prxyyaupla .gt_striped {
+#issyirater .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#prxyyaupla .gt_table_body {
+#issyirater .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -509,7 +519,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#prxyyaupla .gt_footnotes {
+#issyirater .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -523,13 +533,13 @@
   border-right-color: #D3D3D3;
 }
 
-#prxyyaupla .gt_footnote {
+#issyirater .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#prxyyaupla .gt_sourcenotes {
+#issyirater .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -543,41 +553,41 @@
   border-right-color: #D3D3D3;
 }
 
-#prxyyaupla .gt_sourcenote {
+#issyirater .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#prxyyaupla .gt_left {
+#issyirater .gt_left {
   text-align: left;
 }
 
-#prxyyaupla .gt_center {
+#issyirater .gt_center {
   text-align: center;
 }
 
-#prxyyaupla .gt_right {
+#issyirater .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#prxyyaupla .gt_font_normal {
+#issyirater .gt_font_normal {
   font-weight: normal;
 }
 
-#prxyyaupla .gt_font_bold {
+#issyirater .gt_font_bold {
   font-weight: bold;
 }
 
-#prxyyaupla .gt_font_italic {
+#issyirater .gt_font_italic {
   font-style: italic;
 }
 
-#prxyyaupla .gt_super {
+#issyirater .gt_super {
   font-size: 65%;
 }
 
-#prxyyaupla .gt_footnote_marks {
+#issyirater .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -604,49 +614,6 @@
     </tr>
 </thead>
 <tbody class="gt_table_body">
-<tr class="gt_group_heading_row">
-<td colspan="6" class="gt_group_heading"><strong>Zona - SC</strong></td>
-    </tr>
-<tr>
-<td class="gt_row gt_left">Sexo</td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center"></td>
-<td class="gt_row gt_center">0.808</td>
-</tr>
-<tr>
-<td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Mujer</td>
-<td class="gt_row gt_center">25 (66%)</td>
-<td class="gt_row gt_center">94 (70%)</td>
-<td class="gt_row gt_center">71 (74%)</td>
-<td class="gt_row gt_center">49 (70%)</td>
-<td class="gt_row gt_center"></td>
-</tr>
-<tr>
-<td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Hombre</td>
-<td class="gt_row gt_center">13 (34%)</td>
-<td class="gt_row gt_center">40 (30%)</td>
-<td class="gt_row gt_center">25 (26%)</td>
-<td class="gt_row gt_center">21 (30%)</td>
-<td class="gt_row gt_center"></td>
-</tr>
-<tr>
-<td class="gt_row gt_left">Puntaje BAI</td>
-<td class="gt_row gt_center">9 (5, 17)</td>
-<td class="gt_row gt_center">4 (1, 12)</td>
-<td class="gt_row gt_center">4 (2, 10)</td>
-<td class="gt_row gt_center">4 (1, 8)</td>
-<td class="gt_row gt_center">0.017</td>
-</tr>
-<tr>
-<td class="gt_row gt_left">Puntaje PSQI</td>
-<td class="gt_row gt_center">7 (5, 9)</td>
-<td class="gt_row gt_center">8 (5, 11)</td>
-<td class="gt_row gt_center">8 (5, 11)</td>
-<td class="gt_row gt_center">8 (6, 11)</td>
-<td class="gt_row gt_center">0.519</td>
-</tr>
 <tr class="gt_group_heading_row">
 <td colspan="6" class="gt_group_heading"><strong>Zona - EC</strong></td>
     </tr>
@@ -676,24 +643,70 @@
 </tr>
 <tr>
 <td class="gt_row gt_left">Puntaje BAI</td>
-<td class="gt_row gt_center">13 (6, 21)</td>
-<td class="gt_row gt_center">9 (4, 15)</td>
-<td class="gt_row gt_center">7 (3, 10)</td>
-<td class="gt_row gt_center">4 (0, 6)</td>
+<td class="gt_row gt_center">13 (15)<sup>x</sup>
+</td>
+<td class="gt_row gt_center">9 (11)<sup>y</sup>
+</td>
+<td class="gt_row gt_center">7 (7)</td>
+<td class="gt_row gt_center">4 (6)</td>
 <td class="gt_row gt_center">&lt;0.001</td>
 </tr>
 <tr>
 <td class="gt_row gt_left">Puntaje PSQI</td>
-<td class="gt_row gt_center">10 (7, 12)</td>
-<td class="gt_row gt_center">8 (6, 12)</td>
-<td class="gt_row gt_center">10 (6, 12)</td>
-<td class="gt_row gt_center">8 (4, 10)</td>
+<td class="gt_row gt_center">10 (5)</td>
+<td class="gt_row gt_center">8 (6)</td>
+<td class="gt_row gt_center">10 (6)</td>
+<td class="gt_row gt_center">8 (6)</td>
 <td class="gt_row gt_center">0.075</td>
+</tr>
+<tr class="gt_group_heading_row">
+<td colspan="6" class="gt_group_heading"><strong>Zona - SC</strong></td>
+    </tr>
+<tr>
+<td class="gt_row gt_left">Sexo</td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center"></td>
+<td class="gt_row gt_center">0.808</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Mujer</td>
+<td class="gt_row gt_center">25 (66%)</td>
+<td class="gt_row gt_center">94 (70%)</td>
+<td class="gt_row gt_center">71 (74%)</td>
+<td class="gt_row gt_center">49 (70%)</td>
+<td class="gt_row gt_center"></td>
+</tr>
+<tr>
+<td class="gt_row gt_left" style="text-align: left; text-indent: 10px;">Hombre</td>
+<td class="gt_row gt_center">13 (34%)</td>
+<td class="gt_row gt_center">40 (30%)</td>
+<td class="gt_row gt_center">25 (26%)</td>
+<td class="gt_row gt_center">21 (30%)</td>
+<td class="gt_row gt_center"></td>
+</tr>
+<tr>
+<td class="gt_row gt_left">Puntaje BAI</td>
+<td class="gt_row gt_center">9 (12)<sup>x</sup>
+</td>
+<td class="gt_row gt_center">4 (11)</td>
+<td class="gt_row gt_center">4 (8)</td>
+<td class="gt_row gt_center">4 (7)</td>
+<td class="gt_row gt_center">0.017</td>
+</tr>
+<tr>
+<td class="gt_row gt_left">Puntaje PSQI</td>
+<td class="gt_row gt_center">7 (4)</td>
+<td class="gt_row gt_center">8 (6)</td>
+<td class="gt_row gt_center">8 (6)</td>
+<td class="gt_row gt_center">8 (5)</td>
+<td class="gt_row gt_center">0.519</td>
 </tr>
 </tbody>
 </table>
 </div>
-</div>
+<p><strong>Tabla 1</strong>. Características sociodemográficas agrupadas por zonas, grupos etarios y parámetros psicométricos. Los valores son presentados por rango etario como <em>Mdn</em> (<em>IQR</em>) para puntaje de BAI y PSQI. Para las variables sexo y grupos (EC, en confinamiento; SC, sin confinamiento) se definen como n (%). El p-valor de cada variable corresponden a: a, prueba <span class="math inline">\(\chi^2\)</span> de <em>Pearson</em>; b, prueba de suma de rangos de <em>Wilcoxon</em>; x, indica <em>p</em> &lt; 0.05, comparado con los otros grupos; y, indica <em>p</em> &lt; 0.05 comparado con &gt;50 años.</p>
 </div>
   </div>
 

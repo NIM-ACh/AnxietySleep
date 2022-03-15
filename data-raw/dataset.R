@@ -3,22 +3,18 @@
 
 library(data.table)
 
-
-# Importamos los datos ------------------------------------------------------------------------
-
-dataset <- data.table::fread(input = "data-raw/dataset_raw.csv")
-
+dataset <- fread("data-raw/dataset.csv")
 
 # Tratamiento inicial -------------------------------------------------------------------------
 
-dataset[, sexo := factor(sexo, levels = 0:1, labels = c("Mujer", "Hombre"))]
+dataset[, id := as.factor(id)][]
 
-dataset[, zona := factor(zona, levels = 1:2, labels = c("EC", "SC"))]
+dataset[, sex := as.factor(sex)][]
 
-dataset[, cat_edad := factor(cat_edad, levels = c("18-25", "26-40", "41-50", ">50"))]
+dataset[, zone := as.factor(zone)][]
 
+dataset[, cat_age := as.factor(cat_age)][]
 
 # Exportamos los datos ------------------------------------------------------------------------
 
-data.table::fwrite(dataset, file = "data-raw/dataset.csv")
 usethis::use_data(dataset, overwrite = TRUE)

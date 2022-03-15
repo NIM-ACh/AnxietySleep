@@ -84,18 +84,18 @@ fig1 <- ggplot(data = dataset[i = eval(remove_outliers)],
            y = sqrt(beck_global))) +
   
   # Hacemos el tamaño de los puntos relativo al número de observaciones
-  geom_count(shape = 21, color = "black", aes(fill = zona), show.legend = FALSE, alpha = 0.5) +
+  geom_count(shape = 21, color = "black", aes(fill = zone), show.legend = FALSE, alpha = 0.5) +
   
   # Usamos la paleta de colores del 'New England Journal of Medicine'
   scale_color_manual(values = pal_nejm()(2), aesthetics = c("fill", "color")) +
   
   # Generamos la línea de regresión LOESS
-  geom_smooth(method = "loess", se = F, aes(col = zona)) +
+  geom_smooth(method = "loess", se = F, aes(col = zone)) +
   
   # Generamos las distribuciones marginales
-  geom_xsideboxplot(mapping = aes(y = zona, fill = zona), orientation = "y", 
+  geom_xsideboxplot(mapping = aes(y = zone, fill = zone), orientation = "y", 
                     outlier.shape = 21, outlier.alpha = .5, alpha = 0.5) +
-  geom_ysideboxplot(mapping = aes(x = zona, fill = zona), orientation = "x", 
+  geom_ysideboxplot(mapping = aes(x = zone, fill = zone), orientation = "x", 
                     outlier.shape = 21, outlier.alpha = .5, alpha = 0.5) +
   
   # Y eliminamos las etiquetas de los ejes de estas distribuciones marginales
@@ -105,8 +105,8 @@ fig1 <- ggplot(data = dataset[i = eval(remove_outliers)],
   # Modificamos las etiquetas de los ejes
   labs(x = expression(sqrt("PSQI")),
        y = expression(sqrt("BAI")),
-       col = "Confinamiento",
-       fill = "Confinamiento") +
+       col = "Confinement",
+       fill = "Confinement") +
   
   # Añadimos un tema para mejorar la estética
   theme_linedraw(base_family = "Times",
@@ -130,15 +130,15 @@ fig1
 <details><summary>Ver código</summary>
 ```{r}
 p1 <- ggstatsplot::ggbetweenstats(
-  data = dataset, x = sexo, y = beck_global, 
+  data = dataset, x = sex, y = beck_global, 
   type = "np", xlab = "", ylab = "BAI", results.subtitle = FALSE,
   palette = "default_nejm", package = "ggsci", k = 0,
   ggtheme = theme_linedraw(base_family = "Times", base_size = 16),
   ggplot.component = list(theme(panel.grid = element_blank())))
 
 p2 <- ggstatsplot::ggbetweenstats(
-  data = dataset, x = sexo, y = pits_global, 
-  type = "np", xlab = "Sexo", ylab = "PSQI", results.subtitle = FALSE,
+  data = dataset, x = sex, y = pits_global, 
+  type = "np", xlab = "Sex", ylab = "PSQI", results.subtitle = FALSE,
   palette = "default_nejm", package = "ggsci", k = 0,
   ggtheme = theme_linedraw(base_family = "Times", base_size = 16),
   ggplot.component = list(theme(panel.grid = element_blank())))
@@ -160,7 +160,7 @@ fig2
 
 # Generamos los datos para la tabla
 tbl_data <- copy(dataset)[, `:=`(
-  sexo = `attr<-`(sexo, "label", "Sexo"),
+  sexo = `attr<-`(sex, "label", "Sexo"),
   beck_global = `attr<-`(beck_global, "label", "Puntaje BAI"),
   pits_global = `attr<-`(pits_global, "label", "Puntaje PSQI")
 )][]
@@ -170,8 +170,8 @@ gtsummary::theme_gtsummary_language("es")
 
 # HAcemos la tabla para EC
 ec_tbl <- gtsummary::tbl_summary(
-  data = tbl_data[zona == "EC"], 
-  by = cat_edad, 
+  data = tbl_data[zone == "CZ"], 
+  by = cat_age, 
   include = c(sexo, beck_global, pits_global),
   statistic = gtsummary::all_continuous() ~ "{median} ({IQR})") %>%
   gtsummary::add_p(pvalue_fun = function(x) gtsummary::style_pvalue(x, digits = 3)) %>%
@@ -179,8 +179,8 @@ ec_tbl <- gtsummary::tbl_summary(
 
 # Y la tabla para SC
 sc_tbl <- gtsummary::tbl_summary(
-  data = tbl_data[zona == "SC"], 
-  by = cat_edad, 
+  data = tbl_data[zone == "UZ"], 
+  by = cat_age, 
   include = c(sexo, beck_global, pits_global),
   statistic = gtsummary::all_continuous() ~ "{median} ({IQR})") %>%
   gtsummary::add_p(pvalue_fun = function(x) { gtsummary::style_pvalue(x, digits = 3) }) %>%
@@ -209,8 +209,8 @@ tbl <- tbl %>% gt::text_transform(
 # Añadimos etiquetas a los grupos de filas
 tbl <- tbl %>%
   gt::tab_spanner(label = gt::md("**Grupos etarios**"), columns = paste0("stat_", 1:4)) %>%
-  gt::tab_row_group(label = gt::md("**Zona - SC**"), rows = 6:10) %>%
-  gt::tab_row_group(label = gt::md("**Zona - EC**"), rows = 1:5) 
+  gt::tab_row_group(label = gt::md("**Zona - UZ**"), rows = 6:10) %>%
+  gt::tab_row_group(label = gt::md("**Zona - CZ**"), rows = 1:5) 
 ```
 </details>
 

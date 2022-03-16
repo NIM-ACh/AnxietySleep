@@ -1,7 +1,6 @@
-#' Proyecto Ansiedad y Confinamiento
+#' Anxiety & Confinement
 #'
-#' Herramientas complementarias para el análisis de los datos del proyecto de
-#' investigación sobre ansiedad, calidad de sueño y confinamiento.
+#' Data from the anxiety and confinement study.
 #'
 #' @keywords internal
 "_PACKAGE"

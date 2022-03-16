@@ -1,17 +1,18 @@
 Package: AnxietySleep
-Date: 2021-11-15
-Title: Ansiedad y Confinamiento (2021)
+Date: 2022-03-16
+Title: Anxiety & Confinement
 Version: 0.0.0.9000
 Authors@R: 
-    c(person("Caren", "Alvarado Aravena", , "caren.ccaa@gmail.com", role = c("aut"),
+    c(
+      person("Caren", "Alvarado Aravena", , "caren.ccaa@gmail.com", role = c("aut"),
              comment = c(ORCID = "0000-0002-1851-2499")),
       person("Matías", "Castillo Aguilar", , "matcasti@umag.cl", role = c("aut", "cre"),
              comment = c(ORCID = "0000-0001-7291-247X")),
       person("Cristian", "Núñez Espinosa", , "cristian.nunez@umag.cl", role = c("aut"),
-             comment = c(ORCID = "0000-0002-9896-7062")))
-Description: Herramientas complementarias para el análisis de los datos del estudio de 
-             ansiedad, calidad de sueño y confinamiento (2021).
-License: CC0
+             comment = c(ORCID = "0000-0002-9896-7062"))
+    )
+Description: Data from the anxiety and confinement study.
+License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
@@ -21,17 +22,5 @@ Imports:
 URL: https://github.com/NIM-ACh/AnxietySleep
 BugReports: https://github.com/NIM-ACh/AnxietySleep/issues
 Depends: 
-    R (>= 4.0.0)
+    R (>= 3.1.0)
 LazyData: true
-Suggests: 
-    rmarkdown,
-    knitr,
-    ggstatsplot (>= 0.9.0),
-    ggside (>= 0.1.3),
-    ggsci (>= 2.9),
-    ggpubr (>= 0.4.0),
-    ggplot2 (>= 3.3.5),
-    gtsummary (>= 1.5.0),
-    magrittr (>= 2.0.1),
-    gt (>= 0.3.1)
-VignetteBuilder: knitr

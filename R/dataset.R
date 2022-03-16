@@ -1,21 +1,19 @@
-#' Datos del estudio de ansiedad, calidad de sueño y confinamiento
+#' Data from the anxiety and confinement study.
 #'
-#' Herramientas complementarias para el análisis de los datos del proyecto de
-#' investigación sobre ansiedad, calidad de sueño y confinamiento.
+#' This dataset contains the variables used in the anxiety and confinement study carried out
+#' by Caren Alvarado Aravena et al.
 #'
-#' @format Un data frame con 625 filas y 6 variables:
+#' @format A data frame with 617 rows y 7 variables:
 #'
 #' \itemize{
-#'   \item{\code{edad}: Número entero. Edad de los participantes en años.}
-#'   \item{\code{sexo}: Factor c/ 2 niveles "Mujer", "Hombre". Sexo de los participantes.}
-#'   \item{\code{zona}: Factor c/ 2 niveles "EC", "SC". Zona en la que se encontraba de residente
-#'   el participante al momento de ser encuestado.}
-#'   \item{\code{beck_global}: Número entero. Puntaje global del Inventario de Ansiedad de Beck.}
-#'   \item{\code{pits_global}: Número entero. Puntaje global cuestionario de calidad de sueño de
-#'   Pittsburgh.}
-#'   \item{\code{cat_edad}: Factor c/ 4 niveles "18-25", "26-40", "41-50", ">50" . Edad de los
-#'   participantes en años.}
+#'   \item{\code{id}: Factor. An identification code for each subject.}
+#'   \item{\code{sex}: Factor w/ 2 levels "Female", "Male". Sex of participants.}
+#'   \item{\code{zone}: Factor w/ 2 levels "CZ", "UZ". Zone in which the subject were by the time he was answering the questionnaire, either CZ (Confinement Zone) or UZ (Unconfinement Zone).}
+#'   \item{\code{beck_global}: Integer. Global score of Beck Anxiety Inventory.}
+#'   \item{\code{pits_global}: Integer. Global score of Pittsburgh Sleep Quality Index.}
+#'   \item{\code{age}: Integer. Age of the subjects in years.}
+#'   \item{\code{cat_age}: Factor w/ 4 levels "18-25", "26-40", "41-50", ">50". Age of the subjects in years.}
 #' }
 #'
-#' @source Alvarado et al, 2021.
-"dataset"
+#' @source Alvarado et al. 2022.
+"anxiety"

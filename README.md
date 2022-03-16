@@ -12,25 +12,25 @@ status](https://www.r-pkg.org/badges/version/AnxietySleep)](https://CRAN.R-proje
 [![R-CMD-check](https://github.com/NIM-ACh/AnxietySleep/workflows/R-CMD-check/badge.svg)](https://github.com/NIM-ACh/AnxietySleep/actions)
 <!-- badges: end -->
 
-Este paquete de <i class="fab fa-r-project"></i> contiene herramientas
-complementarias para la exploración y la reproducibilidad de los
-análisis llevados a cabo para el estudio de Ansiedad y Confinamiento.
+This R package contains complementary tools for the exploration and
+reproducibility of the analyses carried out for the study of Anxiety and
+Confinement.
 
-Este estudio es llevado a cabo por Caren Alvarado Aravena, Matías
-Castillo Aguilar y Cristian Núñez Espinosa.
+This data package is developed by Caren Alvarado Aravena, Matías
+Castillo Aguilar and Cristian Núñez Espinosa.
 
-## Sobre <i class="fab fa-r-project"></i>
+## About <i class="fab fa-r-project"></i>
 
-<i class="fab fa-r-project"></i>, es un lenguaje de programación
-estadística de alto nivel usado para el análisis de datos, así como para
-el desarrollo de herramientas informáticas como sitios web, reportes,
-aplicaciones, libros digitales, etc. Para más información puedes visitar
-el sitio de [R-project](https://www.r-project.org/about.html).
+R is a high-level statistical programming language used for data
+analysis, as well as for the development of software tools such as web
+sites, reports, applications, digital books, etc. For more information
+you can visit the \[R-project\] website
+(<https://www.r-project.org/about.html>).
 
-## Instalación
+## Installation
 
-Para instalar el paquete `AnxietySleep` en su versión de desarrollo,
-puedes escribir en tu consola d `R` lo siguiente:
+To install the development version of the package, you can type in your
+`R` console the following:
 
 ``` r
 # install.packages("devtools")

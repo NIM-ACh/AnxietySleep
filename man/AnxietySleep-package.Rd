@@ -4,10 +4,9 @@
 \name{AnxietySleep-package}
 \alias{AnxietySleep}
 \alias{AnxietySleep-package}
-\title{Proyecto Ansiedad y Confinamiento}
+\title{Anxiety & Confinement}
 \description{
-Herramientas complementarias para el análisis de los datos del proyecto de
-investigación sobre ansiedad, calidad de sueño y confinamiento.
+Data from the anxiety and confinement study.
 }
 \seealso{
 Useful links:

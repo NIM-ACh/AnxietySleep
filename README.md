@@ -24,8 +24,8 @@ Castillo Aguilar and Cristian Núñez Espinosa.
 R is a high-level statistical programming language used for data
 analysis, as well as for the development of software tools such as web
 sites, reports, applications, digital books, etc. For more information
-you can visit the \[R-project\] website
-(<https://www.r-project.org/about.html>).
+you can visit the [R-project](https://www.r-project.org/about.html)
+website.
 
 ## Installation
 

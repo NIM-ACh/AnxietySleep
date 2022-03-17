@@ -1,8 +1,48 @@
 url: ~
 
 template:
-  params:
-    bootswatch: flatly
+  bootstrap: 5
+  bootswatch: minty
+
 
 toc:
   depth: 2
+
+navbar:
+  bg: light
+  structure:
+    left: [home, reference, articles]
+    right: [news, github]
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      icon: fab fa-r-project fa-lg
+      text: Documentation
+      href: reference/index.html
+    articles:
+      icon: fa fa-fw fa-book fa-lg
+      text: Articles
+      menu:
+      - text: Data usage
+      - text: Using the `anxiety` dataset
+        href: articles/supplementary.html
+      - text: External links
+      - text: Original paper (soon)
+        href: #
+      - text: NIM-ACh research group
+        href: https://nimach.org
+
+    news:
+      icon: fas fa-history fa-lg
+      href: news/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/NIM-ACh/AnxietySleep/
+
+
+reference:
+- title: All functions
+- subtitle: Dataset
+  contents: anxiety

@@ -39,7 +39,7 @@ cor_label <- function(test) {
 }
 
 # Cargamos los datos
-data <- readRDS(file = here::here("data/clean/data_clean.RDS"))
+data <- AnxietySleep::anxiety
 ```
 
 **Título**: Efecto del confinamiento sobre la sintomatología ansiosa y calidad de sueño en la población residente en latitud sur durante la pandemia de COVID-19.
@@ -95,9 +95,9 @@ Este estudio utilizó un diseño transversal observacional descriptivo. El muest
 
 <!-- Descriptivos generales: muestra total, edad promedio, cantidad de mujeres, cantidad por región. -->
 ```{r participantes, eval=FALSE}
-data[j = .(edad = cent_disp(edad), .N)]
-data[j = .(.N, `%` = round(.N/nrow(data)*100, 1)), by = sexo]
-data[j = .(.N, `%` = round(.N/nrow(data)*100, 1)), by = region]
+data[j = .(age = cent_disp(age), .N)]
+data[j = .(.N, `%` = round(.N/nrow(data)*100, 1)), by = sex]
+data[j = .(.N, `%` = round(.N/nrow(data)*100, 1)), by = zone]
 ```
 
 Un total de 617 personas (edad: *Mdn* = 34, *IQR* = 22) participaron en este estudio, de los cuales  458 [74.2%] fueron mujeres. Los participantes fueron reclutados de la misma zona geográfica de latitud sur, debiendo cumplir con los siguientes criterios de inclusión: ser mayor de 18 años, ser de nacionalidad chilena, no estar utilizando fármacos ansiolíticos y/o somníferos. Aquellas personas que no completaran el formulario en su totalidad serían excluidas del estudio. El estudio fue aprobado por el Comité de Ética de Investigación de la Universidad de Magallanes (N°025/CEC/2020) y se realizó de acuerdo con la Declaración de Helsinki sobre los principios éticos en seres humanos.
@@ -140,26 +140,18 @@ Para el rechazo de la hipótesis nula, se planteó que la probabilidad de comete
 <!-- Diferencia entre ansiedad y grupo etario, región, sexo y mascota -->
 ```{r ansiedad-por-grupos, eval=FALSE}
 # Sexo
-data[, cent_disp(beck_global), sexo]; autest(data, "sexo", "beck_global", markdown = T)$full |> cat()
-data[, cent_disp(pits_global), sexo]; autest(data, "sexo", "pits_global", markdown = T)$full |> cat()
+data[, cent_disp(beck_global), sex]; autest(data, "sex", "beck_global", markdown = T)$full |> cat()
+data[, cent_disp(pits_global), sex]; autest(data, "sex", "pits_global", markdown = T)$full |> cat()
 
 # Región
-data[, cent_disp(beck_global), region]; autest(data, "region", "beck_global", markdown = T)$full |> cat()
-data[, cent_disp(pits_global), region]; autest(data, "region", "pits_global", markdown = T)$full |> cat()
+data[, cent_disp(beck_global), zone]; autest(data, "zone", "beck_global", markdown = T)$full |> cat()
+data[, cent_disp(pits_global), zone]; autest(data, "zone", "pits_global", markdown = T)$full |> cat()
 
 # Grupos etarios
-data[, cent_disp(beck_global), cat_edad]; autest(data, "cat_edad", "beck_global", markdown = T)$full |> cat()
-pairs_two_sample(data, "cat_edad", "beck_global")[j = lablr(.SD, T)$full, by = .(group1, group2)]
+data[, cent_disp(beck_global), cat_age]; autest(data, "cat_age", "beck_global", markdown = T)$full |> cat()
+pairs_two_sample(data, "cat_age", "beck_global")[j = lablr(.SD, T)$full, by = .(group1, group2)]
 
-data[, cent_disp(pits_global), cat_edad]; autest(data, "cat_edad", "pits_global", markdown = T)$full |> cat()
-
-data[, .N, by = n_personas_convive] 
-
-data[, cent_disp(beck_global), by = n_personas_convive] 
-autest(data, x = "n_personas_convive", y = "beck_global", paired = FALSE)
-pairs_two_sample(data, x = "n_personas_convive", y = "beck_global")[p.value <= 0.05]
-
-autest(data, x = "n_personas_convive", y = "pits_global")
+data[, cent_disp(pits_global), cat_age]; autest(data, "cat_age", "pits_global", markdown = T)$full |> cat()
 
 ```
 
@@ -169,10 +161,10 @@ Al explorar el efecto del sexo sobre la sintomatología ansiosa, observamos que 
 
 ```{r regresion, eval=FALSE}
 # beck_global
-lm(sqrt(beck_global) ~ sexo + region, data) |> anova() |> report::report_statistics()
+lm(sqrt(beck_global) ~ sex * zone, data) |> anova() |> report::report_statistics()
 
 # pits_global
-lm(sqrt(pits_global) ~ sexo + region, data) |> anova() |> report::report_statistics()
+lm(sqrt(pits_global) ~ sex * zone, data) |> anova() |> report::report_statistics()
 
 data[-599,.SD, .SDcols = \(i) is.numeric(i) & all(!is.na(i))][-44] |> 
   cluster::pam(3) |> 
@@ -185,10 +177,10 @@ Tras evaluar el impacto del confinamiento sobre las variables transformadas usan
 
 ```{r correlation, eval=FALSE}
 model <- copy(data)[, `:=`(
-  Sexo = factor(sexo, levels = c("Hombre", "Mujer")),
+  Sex = factor(sex, levels = c("Male", "Female")),
   BAI = beck_global,
   PSQI = pits_global
-)] |> lm(formula = sqrt(PSQI) ~ Sexo + sqrt(BAI))
+)] |> lm(formula = sqrt(PSQI) ~ Sex + sqrt(BAI))
 
 model |> equatiomatic::extract_eq(use_coefs = TRUE)
 

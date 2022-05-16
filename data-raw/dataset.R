@@ -3,17 +3,22 @@
 
 library(data.table)
 
-anxiety = fread("data-raw/dataset.csv")
+anxiety = fread("data-raw/raw-data.csv")
 
 # Tratamiento inicial -------------------------------------------------------------------------
 
-anxiety[, id := as.factor(id)][]
+ind = grep("^age|global|latencia|duracion", names(anxiety), value = TRUE, invert = TRUE)
 
-anxiety[, sex := as.factor(sex)][]
+anxiety[, (ind) := lapply(.SD, as.factor), .SDcols = ind][]
 
-anxiety[, zone := as.factor(zone)][]
+# Removing extreme values
+anxiety[pits_latencia > 480, pits_latencia := NA]
+anxiety[pits_duracion_estimada > 24 | pits_duracion_estimada < 1,
+        pits_duracion_estimada := NA]
 
-anxiety[, cat_age := as.factor(cat_age)][]
+# Rounding numeric values to no more than 1 decimal place
+anxiety[, pits_latencia := round(pits_latencia, 1)]
+anxiety[, pits_duracion_estimada := round(pits_duracion_estimada, 1)]
 
 # Exportamos los datos ------------------------------------------------------------------------
 

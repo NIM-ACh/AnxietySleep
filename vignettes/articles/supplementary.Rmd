@@ -67,7 +67,7 @@ fig1 <- ggplot(data = anxiety[i = eval(remove_outliers)],
        fill = "Confinement") +
   
   # Modify font size and family
-  theme_linedraw(base_family = "Times",
+  theme_linedraw(base_family = "Times New Roman",
                  base_size = 16) +
   
   # Moving legend on top and removing background grind

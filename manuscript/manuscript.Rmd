@@ -135,6 +135,18 @@ Como estimadores del tamaño del efecto (ES), se usó la correlación biserial p
 
 Para el rechazo de la hipótesis nula, se planteó que la probabilidad de cometer un error tipo I ($\alpha$) fuese menor o igual al 5%, (i.e. p ≤ 0.05), como evidencia suficiente para la significancia estadística. El análisis estadístico se realizó usando el lenguaje de programación *R* en su versión 4.1.1 [@rlanguage] en la interfaz gráfica de RStudio [@rstudio].
 
+```{r eval=FALSE}
+ind_beck <- grep("global$", grep("^beck", names(data), value = T), invert = TRUE, value = TRUE)
+ind_pits <- grep("global|hora|latencia", grep("^pits", names(data), value = T), invert = TRUE, value = TRUE)
+
+set.seed(123)
+ltm::cronbach.alpha(data = data[, ind_beck, with = FALSE], standardized = TRUE, CI = TRUE, B = 1e4)
+set.seed(123)
+ltm::cronbach.alpha(data = data[, ind_pits, with = FALSE], standardized = TRUE, CI = TRUE, B = 1e4, na.rm = T)
+
+```
+
+
 # Resultados
 
 <!-- Diferencia entre ansiedad y grupo etario, región, sexo y mascota -->
@@ -161,35 +173,60 @@ Al explorar el efecto del sexo sobre la sintomatología ansiosa, observamos que 
 
 ```{r regresion, eval=FALSE}
 # beck_global
-lm(sqrt(beck_global) ~ sex * zone, data) |> anova() |> report::report_statistics()
+mod_bai1 <- aov(sqrt(beck_global) ~ zone, data)
+mod_bai2 <- aov(sqrt(beck_global) ~ sex + zone, data)
+mod_bai3 <- aov(sqrt(beck_global) ~ sex + cat_age + zone, data)
+
+anova(mod_bai1, mod_bai2)
+anova(mod_bai2, mod_bai3)
+
+lapply(mget(paste0("mod_bai", 1:3)), report::report_statistics)
+#> $mod_bai1
+#> F(1, 615) = 33.40, p < .001; Eta2 = 0.05, 95% CI [0.03, 1.00]
+#> $mod_bai2
+#> F(1, 614) = 17.97, p < .001; Eta2 (partial) = 0.03, 95% CI [0.01, 1.00]
+#> F(1, 614) = 30.08, p < .001; Eta2 (partial) = 0.05, 95% CI [0.02, 1.00]
+#> $mod_bai3
+#> F(1, 611) = 19.31, p < .001; Eta2 (partial) = 0.03, 95% CI [0.01, 1.00]
+#> F(3, 611) = 25.25, p < .001; Eta2 (partial) = 0.11, 95% CI [0.07, 1.00]
+#> F(1, 611) = 5.37, p = 0.021; Eta2 (partial) = 8.71e-03, 95% CI [6.97e-04, 1.00]
 
 # pits_global
-lm(sqrt(pits_global) ~ sex * zone, data) |> anova() |> report::report_statistics()
+mod_pits1 <- aov(sqrt(pits_global) ~ zone, data)
+mod_pits2 <- aov(sqrt(pits_global) ~ sex + zone, data)
+mod_pits3 <- aov(sqrt(pits_global) ~ sex + cat_age + zone, data)
 
-data[-599,.SD, .SDcols = \(i) is.numeric(i) & all(!is.na(i))][-44] |> 
-  cluster::pam(3) |> 
-  factoextra::fviz_cluster(
-    data = data[-599,.SD, .SDcols = \(i) is.numeric(i) & all(!is.na(i))][-44],
-  )
+anova(mod_pits1, mod_pits2)
+anova(mod_pits2, mod_pits3)
+
+lapply(mget(paste0("mod_pits", 1:3)), report::report_statistics)
+#> $mod_pits1
+#> F(1, 615) = 7.34, p = 0.007; Eta2 = 0.01, 95% CI [1.81e-03, 1.00]
+#> $mod_pits2
+#> F(1, 614) = 18.66, p < .001; Eta2 (partial) = 0.03, 95% CI [0.01, 1.00]
+#> F(1, 614) = 5.61, p = 0.018; Eta2 (partial) = 9.05e-03, 95% CI [8.17e-04, 1.00]
+#> $mod_pits3
+#> F(1, 611) = 18.72, p < .001; Eta2 (partial) = 0.03, 95% CI [0.01, 1.00]
+#> F(3, 611) = 2.57, p = 0.054; Eta2 (partial) = 0.01, 95% CI [0.00, 1.00]
+#> F(1, 611) = 2.85, p = 0.092; Eta2 (partial) = 4.64e-03, 95% CI [0.00, 1.00]
+
 ```
 
 Tras evaluar el impacto del confinamiento sobre las variables transformadas usando ANOVA, luego de controlar por la influencia del sexo, observamos que este mantuvo un efecto significativo sobre $\sqrt{BAI}$ (*F*(1, 614) = 30.08, *p* < 0.001; $\eta^2_p$ = 0.05, CI~95%~[0.02, 1.00]), y sobre $\sqrt{PSQI}$, *F*(1, 614) = 5.61, *p* = 0.018; $\eta^2_p$ = 9.05e-03, CI~95%~[8.17e-04, 1.00]. La distribución bivariada y la naturaleza cuantitativa de las variables transformadas para EC y SC pueden apreciarse en la [Figura 1](#fig1).
 
 ```{r correlation, eval=FALSE}
-model <- copy(data)[, `:=`(
-  Sex = factor(sex, levels = c("Male", "Female")),
-  BAI = beck_global,
-  PSQI = pits_global
-)] |> lm(formula = sqrt(PSQI) ~ Sex + sqrt(BAI))
 
-model |> equatiomatic::extract_eq(use_coefs = TRUE)
+(mod1 <- lm(formula = sqrt(beck_global) ~ sqrt(pits_global), data))
+(mod2 <- lm(formula = sqrt(beck_global) ~ sex + sqrt(pits_global), data))
+(mod3 <- lm(formula = sqrt(beck_global) ~ sex + cat_age + sqrt(pits_global), data))
+
+mod3 |> anova()
 
 par(mfrow = c(3,2))
-model |> plot(1:6)
-par(mfrow = c(1,1))
+plot(mod3, which = 1:6)
 
-model |> report::report() 
-model |> summary()
+mod3 |> report::report() 
+mod3 |> summary()
 
 # Supuestos del modelo
 model |> performance::check_collinearity()
@@ -198,9 +235,9 @@ model |> performance::check_heteroscedasticity()
 
 ```
 
-Al analizar el efecto de $\sqrt{BAI}$ sobre $\sqrt{PSQI}$ mediante la implementación de un modelo de regresión lineal múltiple, hallamos que el incremento en 1 unidad en $\sqrt{BAI}$, se asoció a un aumento en 0.24 unidades en $\sqrt{PSQI}$ tras controlar por la influencia del sexo (CI~95%~[0.21, 0.27], *t*(614) = 15.94, *p* < 0.001;), lo que se expresa de mejor manera en la [Ecuación 1](#eq1). Este modelo explica una proporción estadísticamente significativa y sustancial de la varianza (R^2^ = 0.31, *F*(2, 614) = 140.1, *p* < 0.001, R^2^ ajustado = 0.31).
+Al analizar el efecto de $\sqrt{PSQI}$ sobre $\sqrt{BAI}$ mediante la implementación de un modelo de regresión lineal múltiple, hallamos que el incremento en 1 unidad en $\sqrt{PSQI}$, se asoció a un aumento en 1.21 unidades en $\sqrt{BAI}$ tras controlar por la influencia del sexo (CI~95%~[1.06, 1.35], *t*(614) = 15.94, *p* < 0.001;), lo que se expresa de mejor manera en la [Ecuación 1](#eq1). Este modelo explica una proporción estadísticamente significativa y sustancial de la varianza (R^2^ = 0.31, *F*(2, 614) = 139.2, *p* < 0.001, R^2^ ajustado = 0.31).
 
-$$\widehat{\sqrt{PSQI}} = 2.14 + 0.13(Sexo_{Mujer}) + 0.24(\sqrt{BAI})$$
+$$\widehat{\sqrt{BAI}} = -1.03 + 0.26(Sexo_{Mujer}) + 1.21(\sqrt{PSQI})$$
 [**Ecuación 1**]{#eq1}. Modelo de regresión lineal múltiple, considerando la influencia del sexo y la sintomatología ansiosa sobre la calidad de sueño.
 
 # Discusión

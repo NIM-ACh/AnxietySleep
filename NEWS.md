@@ -1,5 +1,4 @@
 # AnxietySleep 0.0.0.9000
 
-* Se crea el paquete bajo el nombre `AnxietySleep`.
-* Se añadió el archivo `NEWS.md` para seguir los cambios en el paquete.
-* Se crea viñeta 
+* The package is created under the name `AnxietySleep`.
+* The file `NEWS.md` was added to track changes.

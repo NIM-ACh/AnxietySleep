@@ -18,13 +18,15 @@ A data frame with 617 rows y 7 variables:
 }
 }
 \source{
-Alvarado et al. 2022.
+\itemize{
+\item Alvarado-Aravena, C., Arriaza, K., Castillo-Aguilar, M., Flores, K., Dagnino-Subiabre, A., Estrada-Goic, C., & Núñez-Espinosa, C. (2022). Effect of Confinement on Anxiety Symptoms and Sleep Quality during the COVID-19 Pandemic. Behavioral Sciences, 12(10), 398.
+}
 }
 \usage{
 anxiety
 }
 \description{
 This dataset contains the variables used in the anxiety and confinement study carried out
-by Caren Alvarado Aravena et al.
+by Alvarado-Aravena et al. 2022.
 }
 \keyword{datasets}

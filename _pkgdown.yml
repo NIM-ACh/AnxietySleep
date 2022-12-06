@@ -29,8 +29,8 @@ navbar:
       - text: Using the `anxiety` dataset
         href: articles/supplementary.html
       - text: External links
-      - text: Original paper (soon)
-        href: #
+      - text: Original paper
+        href: https://doi.org/10.3390/bs12100398
       - text: NIM-ACh research group
         href: https://nimach.org
 

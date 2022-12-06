@@ -1,7 +1,7 @@
 #' Data from the anxiety and confinement study.
 #'
 #' This dataset contains the variables used in the anxiety and confinement study carried out
-#' by Caren Alvarado Aravena et al.
+#' by Alvarado-Aravena et al. 2022.
 #'
 #' @format A data frame with 617 rows y 7 variables:
 #'
@@ -15,5 +15,6 @@
 #'   \item{\code{cat_age}: Factor w/ 4 levels "18-25", "26-40", "41-50", ">50". Age of the subjects in years.}
 #' }
 #'
-#' @source Alvarado et al. 2022.
+#' @source
+#'  -  Alvarado-Aravena, C., Arriaza, K., Castillo-Aguilar, M., Flores, K., Dagnino-Subiabre, A., Estrada-Goic, C., & Núñez-Espinosa, C. (2022). Effect of Confinement on Anxiety Symptoms and Sleep Quality during the COVID-19 Pandemic. Behavioral Sciences, 12(10), 398.
 "anxiety"

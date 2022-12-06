@@ -25,6 +25,7 @@ dataset <- AnxietySleep::anxiety
 
 # Eliminamos dos valores
 remove_outliers <- quote(-c(which.min(pits_global), which.max(pits_global)))
+dataset[, zone := `levels<-`(zone, c("CZ", "PZ"))]
 
 fig1 <- ggplot(data = dataset[i = eval(remove_outliers)],
                aes(x = sqrt(pits_global),
@@ -66,23 +67,6 @@ fig1 <- ggplot(data = dataset[i = eval(remove_outliers)],
         ggside.panel.scale.x = .15,
         ggside.panel.scale.y = (.15 * 3 / 4))
 
-# Figura 2 ------------------------------------------------------------------------------------
-
-p1 <- ggstatsplot::ggbetweenstats(
-  data = dataset, x = sex, y = beck_global,
-  type = "np", xlab = "", ylab = "BAI", results.subtitle = FALSE,
-  palette = "default_nejm", package = "ggsci", k = 0,
-  ggtheme = theme_linedraw(base_family = "Times", base_size = 16),
-  ggplot.component = list(theme(panel.grid = element_blank())))
-
-p2 <- ggstatsplot::ggbetweenstats(
-  data = dataset, x = sex, y = pits_global,
-  type = "np", xlab = "Sexo", ylab = "PSQI", results.subtitle = FALSE,
-  palette = "default_nejm", package = "ggsci", k = 0,
-  ggtheme = theme_linedraw(base_family = "Times", base_size = 16),
-  ggplot.component = list(theme(panel.grid = element_blank())))
-
-fig2 <- ggpubr::ggarrange(p1, p2, labels = c("A.", "B."), ncol = 1, hjust = 0)
 
 # Exportamos y guardamos el gráfico -----------------------------------------------------------
 
@@ -92,24 +76,13 @@ local({
   print(fig1);
   dev.off();
 })
-local({
-  pdf("man/figures/figure-2.pdf", width = 6, height = 8);
-  print(fig2);
-  dev.off();
-})
 
 ## TIFF
 local({
-  tiff("man/figures/figure-1.tiff", width = 8, height = 6, units = "in", res = 600);
+  tiff("man/figures/figure-1.tiff", width = 8, height = 6, units = "in", res = 390);
   print(fig1);
   dev.off();
 })
-local({
-  tiff("man/figures/figure-2.tiff", width = 6, height = 8, units = "in", res = 600);
-  print(fig2);
-  dev.off();
-})
-
 
 # Información de la sesión --------------------------------------------------------------------
 

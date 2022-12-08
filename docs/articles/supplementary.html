@@ -120,8 +120,8 @@ variables, we can do this with just one line of code:</p>
 <span><span class="co">#&gt;       sex zone mean_age</span></span>
 <span><span class="co">#&gt; 1: Female   CZ 30.46222</span></span>
 <span><span class="co">#&gt; 2:   Male   CZ 33.11290</span></span>
-<span><span class="co">#&gt; 3: Female   UZ 40.24034</span></span>
-<span><span class="co">#&gt; 4:   Male   UZ 39.69072</span></span></code></pre></div>
+<span><span class="co">#&gt; 3: Female   PZ 40.24034</span></span>
+<span><span class="co">#&gt; 4:   Male   PZ 39.69072</span></span></code></pre></div>
 <p>The reason our syntax is so concise is because we are implicitly
 using the <a href="https://rdatatable.gitlab.io/data.table/" class="external-link"><code>data.table</code></a>
 package which allows us to use the <code>DT[i, j, by]</code> syntax. For
@@ -148,7 +148,7 @@ between men and women:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">anxiety</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y  <span class="op">=</span> <span class="va">age</span>, x <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"summary"</span>, </span>
 <span>           fun <span class="op">=</span> <span class="st">"mean"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="supplementary_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
+<p><img src="supplementary_files/figure-html/unnamed-chunk-3-1.png" width="2260.41666666667"></p>
 <p>Nice! Now let’s add some error bars representing the error of the
 mean to get a better intuition of the difference:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -158,14 +158,14 @@ mean to get a better intuition of the difference:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_linerange.html" class="external-link">geom_errorbar</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="st">"summary"</span>,</span>
 <span>                fun.data <span class="op">=</span> <span class="st">"mean_se"</span>, </span>
 <span>                width <span class="op">=</span> <span class="fl">.5</span><span class="op">)</span></span></code></pre></div>
-<p><img src="supplementary_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<p><img src="supplementary_files/figure-html/unnamed-chunk-4-1.png" width="2260.41666666667"></p>
 <p>Good, but not quite there… Maybe if we add some form of shape that
 can inform us about the distribution of each group. We can try using a
 boxplot for this end:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">anxiety</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>y  <span class="op">=</span> <span class="va">age</span>, fill <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="supplementary_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<p><img src="supplementary_files/figure-html/unnamed-chunk-5-1.png" width="2260.41666666667"></p>
 <p>At this point we costumize even further by adding other geoms like
 violin and dots and even grouping for other variables for further
 enhance our work. This will allow us to generate an informative graphic
@@ -179,8 +179,8 @@ that is visually pleasing:</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"Confinement zone"</span>, x <span class="op">=</span> <span class="st">"Sex"</span>, y <span class="op">=</span> <span class="st">"Age (years old)"</span>,</span>
 <span>       title <span class="op">=</span> <span class="st">"Age by Sex and Confinement Zone"</span>,</span>
 <span>       subtitle <span class="op">=</span> <span class="st">"Violin and box plots showing the observed age distribution per group"</span>,</span>
-<span>       caption <span class="op">=</span> <span class="st">"CZ = Confinement zone\nUZ = Unconfinement zone"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="supplementary_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<span>       caption <span class="op">=</span> <span class="st">"CZ = Confinement zone\nPZ = Partial confinement zone"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="supplementary_files/figure-html/unnamed-chunk-6-1.png" width="2260.41666666667"></p>
 <p>By using a layer-style plotting system, we can create informative
 visualization that can generate meaningfull insights from the data.</p>
 </div>

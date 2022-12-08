@@ -82,7 +82,7 @@ ggplot(anxiety, aes(y  = age, x = sex, fill = zone)) +
   labs(fill = "Confinement zone", x = "Sex", y = "Age (years old)",
        title = "Age by Sex and Confinement Zone",
        subtitle = "Violin and box plots showing the observed age distribution per group",
-       caption = "CZ = Confinement zone\nUZ = Unconfinement zone")
+       caption = "CZ = Confinement zone\nPZ = Partial confinement zone")
 ```
 
 By using a layer-style plotting system, we can create informative visualization that can generate meaningfull insights from the data.

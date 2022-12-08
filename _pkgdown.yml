@@ -4,7 +4,6 @@ template:
   bootstrap: 5
   bootswatch: minty
 
-
 toc:
   depth: 2
 
@@ -46,3 +45,8 @@ reference:
 - title: All functions
 - subtitle: Dataset
   contents: anxiety
+
+figures:
+  dev: png
+  fig.ext: png
+  dpi: 310

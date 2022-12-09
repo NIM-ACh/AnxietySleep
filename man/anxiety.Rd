@@ -19,14 +19,32 @@ A data frame with 617 rows y 7 variables:
 }
 \source{
 \itemize{
-\item Alvarado-Aravena, C., Arriaza, K., Castillo-Aguilar, M., Flores, K., Dagnino-Subiabre, A., Estrada-Goic, C., & Núñez-Espinosa, C. (2022). Effect of Confinement on Anxiety Symptoms and Sleep Quality during the COVID-19 Pandemic. Behavioral Sciences, 12(10), 398.
+\item Alvarado-Aravena, C., Arriaza, K., Castillo-Aguilar, M., Flores, K.,
+Dagnino-Subiabre, A., Estrada-Goic, C., & Núñez-Espinosa, C. (2022). Effect
+of Confinement on Anxiety Symptoms and Sleep Quality during the COVID-19
+Pandemic. Behavioral Sciences, 12(10), 398.
 }
 }
 \usage{
 anxiety
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
+
 This dataset contains the variables used in the anxiety and confinement study carried out
 by Alvarado-Aravena et al. 2022.
+}
+\examples{
+# Mean age grouped by sex and zone using `data.table` syntax
+anxiety[,  # No filtering (i)
+        list(mean_age = mean(age)), # Action to do (j)
+        list(sex, zone)] # Grouping vars (by)
+
+# Mean PSQI score grouped by sex and zone, for those with
+# an age greater than 18 AND a Beck score greater than 10.
+anxiety[age > 18 & beck_global > 10,
+        list(mean_psqi = mean(pits_global)),
+        list(sex, zone)]
+
 }
 \keyword{datasets}

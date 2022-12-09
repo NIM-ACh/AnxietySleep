@@ -14,8 +14,8 @@ status](https://www.r-pkg.org/badges/version/AnxietySleep)](https://CRAN.R-proje
 
 This R package contains data to facilitate the exploration and
 reproducibility of the analyses carried out for the study of Anxiety and
-Confinement carried out by Caren Alvarado-Aravena, Matías
-Castillo-Aguilar and Cristian Núñez-Espinosa.
+Confinement conducted by Caren Alvarado-Aravena, Matías Castillo-Aguilar
+and Cristian Núñez-Espinosa.
 
 ## About <i class="fab fa-r-project"></i>
 

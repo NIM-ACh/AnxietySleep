@@ -12,12 +12,10 @@ status](https://www.r-pkg.org/badges/version/AnxietySleep)](https://CRAN.R-proje
 [![R-CMD-check](https://github.com/NIM-ACh/AnxietySleep/workflows/R-CMD-check/badge.svg)](https://github.com/NIM-ACh/AnxietySleep/actions)
 <!-- badges: end -->
 
-This R package contains complementary tools for the exploration and
+This R package contains data to facilitate the exploration and
 reproducibility of the analyses carried out for the study of Anxiety and
-Confinement.
-
-This data package is developed by Caren Alvarado Aravena, Matías
-Castillo Aguilar and Cristian Núñez Espinosa.
+Confinement carried out by Caren Alvarado-Aravena, Matías
+Castillo-Aguilar and Cristian Núñez-Espinosa.
 
 ## About <i class="fab fa-r-project"></i>
 

@@ -17,12 +17,12 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Matías Castillo Aguilar \email{matcasti@umag.cl} (\href{https://orcid.org/0000-0001-7291-247X}{ORCID})
+\strong{Maintainer}: Matías Castillo-Aguilar \email{matcasti@umag.cl} (\href{https://orcid.org/0000-0001-7291-247X}{ORCID})
 
 Authors:
 \itemize{
-  \item Caren Alvarado Aravena \email{caren.ccaa@gmail.com} (\href{https://orcid.org/0000-0002-1851-2499}{ORCID})
-  \item Cristian Núñez Espinosa \email{cristian.nunez@umag.cl} (\href{https://orcid.org/0000-0002-9896-7062}{ORCID})
+  \item Caren Alvarado-Aravena \email{caren.ccaa@gmail.com} (\href{https://orcid.org/0000-0002-1851-2499}{ORCID})
+  \item Cristian Núñez-Espinosa \email{cristian.nunez@umag.cl} (\href{https://orcid.org/0000-0002-9896-7062}{ORCID})
 }
 
 }

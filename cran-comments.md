@@ -1,7 +1,6 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Added the doi of the study being mentioned in the package Description field, 
-as well a more detailed description as suggested.
+* Remove white space within the doi field as suggested.
 
-* Updated Date field in package Description
+* Ensure that the spelling in the Description file was correct.

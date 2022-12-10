@@ -4,14 +4,14 @@ Title: Sleep Quality and Anxiety in Confinement
 Version: 0.0.1
 Authors@R: 
     c(
-      person("Caren", "Alvarado Aravena", , "caren.ccaa@gmail.com", role = c("aut"),
+      person("Caren", "Alvarado-Aravena", , "caren.ccaa@gmail.com", role = c("aut"),
              comment = c(ORCID = "0000-0002-1851-2499")),
-      person("Matías", "Castillo Aguilar", , "matcasti@umag.cl", role = c("aut", "cre"),
+      person("Matías", "Castillo-Aguilar", , "matcasti@umag.cl", role = c("aut", "cre"),
              comment = c(ORCID = "0000-0001-7291-247X")),
-      person("Cristian", "Núñez Espinosa", , "cristian.nunez@umag.cl", role = c("aut"),
+      person("Cristian", "Núñez-Espinosa", , "cristian.nunez@umag.cl", role = c("aut"),
              comment = c(ORCID = "0000-0002-9896-7062"))
     )
-Description: Data from the anxiety and confinement study from Alvarado-Aravena et al. (2022) <doi: 10.3390/bs12100398>.
+Description: Data from the anxiety and confinement study from Alvarado-Aravena et al. (2022) <doi:10.3390/bs12100398>.
 License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

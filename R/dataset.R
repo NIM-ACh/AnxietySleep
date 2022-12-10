@@ -12,7 +12,7 @@
 #' \itemize{
 #'   \item{\code{id}: Factor. An identification code for each subject.}
 #'   \item{\code{sex}: Factor w/ 2 levels "Female", "Male". Sex of participants.}
-#'   \item{\code{zone}: Factor w/ 2 levels "CZ", "UZ". Zone in which the subject were by the time he was answering the questionnaire, either CZ (Confinement Zone) or UZ (Unconfinement Zone).}
+#'   \item{\code{zone}: Factor w/ 2 levels "CZ", "PZ". Zone in which the subject were by the time he was answering the questionnaire, either CZ (Confinement Zone) or PZ (Partial confinement Zone).}
 #'   \item{\code{beck_global}: Integer. Global score of Beck Anxiety Inventory.}
 #'   \item{\code{pits_global}: Integer. Global score of Pittsburgh Sleep Quality Index.}
 #'   \item{\code{age}: Integer. Age of the subjects in years.}

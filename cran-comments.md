@@ -1,5 +1,7 @@
-## R CMD check results
+## Resubmission
+This is a resubmission. In this version I have:
 
-0 errors | 0 warnings | 0 note
+* Added the doi of the study being mentioned in the package Description field, 
+as well a more detailed description as suggested.
 
-* This is a new release.
+* Updated Date field in package Description

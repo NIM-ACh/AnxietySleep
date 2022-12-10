@@ -6,7 +6,7 @@
 \alias{AnxietySleep-package}
 \title{Anxiety & Confinement}
 \description{
-Data from the anxiety and confinement study.
+Data from the anxiety and confinement study from Alvarado et al. (2022) <doi: 10.3390/bs12100398>.
 }
 \seealso{
 Useful links:

@@ -27,8 +27,15 @@ website.
 
 ## Installation
 
-To install the development version of the package, you can type in your
-`R` console the following:
+To install the latest stable version from CRAN you may use the
+following:
+
+``` r
+install.packages("AnxietySleep")
+```
+
+To install the latest development version, you can type in your `R`
+console the following:
 
 ``` r
 # install.packages("devtools")
